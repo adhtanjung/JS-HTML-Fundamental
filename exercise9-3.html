@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VERSION 2.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form onclick="return false">
+        <!-- FILTER -->
+        <fieldset>
+            <legend>Filter</legend>
+            <p>Nama: <input type="text" id="keyword" oninput="filterName()"></p>
+            <p>Harga: <input type="number" name="min" id="min" onkeyup="filterHarga()"> - <input type="number"
+                    name="max" id="max" onkeyup="filterHarga()"></p>
+            <p>Category: <select name="category" id="categoryFilter" onchange="filterKategori()"></select></p>
+        </fieldset>
+
+        <!-- INPUT -->
+        <fieldset>
+            <legend>Input Data</legend>
+            <table>
+                <td><input type="text" name="nama" id="nameInput" placeholder="Nama"></td>
+                <td><input type="number" name="nama" id="priceInput" placeholder="Harga"></td>
+                <td><select name="category" id="categoryInput"></select></td>
+                <td><input type="text" name="nama" id="stockInput" placeholder="Stock"></td>
+            </table>
+            <p><input type="button" value="Input" onclick="addToList()"></p>
+        </fieldset>
+
+        <!-- RENDER -->
+        <fieldset>
+            <legend>Tabel Data</legend>
+            <table id="myTable">
+                <thead>
+                    <th>Id</th>
+                    <th>Category</th>
+                    <th>Nama</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th colspan="3">Action</th>
+                </thead>
+                <tbody id="render">
+
+                </tbody>
+            </table>
+        </fieldset>
+
+        <!-- Cart -->
+        <fieldset>
+            <legend>Cart</legend>
+            <table id="cartTable">
+                <thead>
+                    <th>Id</th>
+                    <th>Category</th>
+                    <th>Nama</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="renderCart">
+
+                </tbody>
+            </table><br>
+            <button onclick="paymentButton()">Payment</button>
+        </fieldset>
+        <!-- Payment -->
+        <fieldset>
+            <legend>Payment</legend>
+            <h2>Transaction Detail</h2>
+            <p id="transactionDetail"></p>
+
+
+        </fieldset>
+    </form>
+</body>
+<script>
+    var arrProduct = [{
+            id: 15945893849,
+            category: 'Fast Food',
+            name: "Noodle",
+            price: 5000,
+            stock: 9
+        },
+        {
+            id: 15945893843,
+            category: 'Electronic',
+            name: "Headphone",
+            price: 500000,
+            stock: 10
+        },
+        {
+            id: 15945893844,
+            category: 'Clothing',
+            name: "Hoodie",
+            price: 300000,
+            stock: 7
+        },
+        {
+            id: 15945893845,
+            category: 'Fruit',
+            name: "Apple",
+            price: 10000,
+            stock: 8
+        },
+    ];
+
+    var cart = [];
+
+    var categoryProduct = [
+        "All",
+        "Fast Food",
+        "Electronic",
+        "Clothing",
+        "Fruit"
+    ];
+
+
+    function addToCart(idProduct) {
+        let productInCart = cart.find((val) => {
+            return val.id === idProduct
+        })
+        let tableNum = arrProduct.findIndex((val) => {
+            return val.id === idProduct
+        })
+        if (arrProduct[tableNum].stock != 0) {
+            if (productInCart) {
+                let tableIndex = arrProduct.findIndex((val) => {
+                    return val.id === idProduct
+                })
+                let cartIndex = cart.findIndex((val) => {
+                    return val.id === idProduct
+                })
+                if (arrProduct[tableIndex].stock != 0) {
+                    arrProduct[tableIndex].stock--
+                    cart[cartIndex].qty++
+                } else {
+                    alert('Stock sudah habis!')
+                }
+                // showCart()
+            } else {
+                var selectedProduct = arrProduct.find((val) => {
+                    return val.id === idProduct
+                });
+                let tableIndex = arrProduct.findIndex((val) => {
+                    return val.id === idProduct
+                })
+                arrProduct[tableIndex].stock--
+
+                cart.push({
+                    ...selectedProduct,
+                    qty: 1
+                });
+            }
+        } else {
+            alert('Stock sudah habis!')
+        }
+        showList(arrProduct)
+        showCart();
+    }
+
+    // var productInCart = cart.find((val) => {
+    //     return val.id === idProduct
+    // });
+    // console.log(productInCart)
+
+    // if (productInCart) {
+    //     var cartIndex = cart.findIndex((val) => {
+    //         return val.id === idProduct
+    //     });
+    //     if (productInCart.qty <= arrProduct.stock) {
+    //         var arrIndex = arrProduct.findIndex((val) => {
+    //             return val.id == idProduct
+    //         })
+    //         arrProduct[arrIndex].stock--
+    //         console.log(arrProduct)
+    //         showList(arrProduct)
+    //     } else {
+    //         null
+    //     }
+    //     cart[cartIndex].qty++;
+    //     console.log(arrProduct)
+    // } else {
+
+    // }
+
+    function showCart() {
+        var newArr = cart.map((val, index) => {
+            return (
+                `
+            <tr>
+              <td>${val.id}</td>
+              <td>${val.category}</td>
+              <td>${val.name}</td>
+              <td>${val.price}</td>
+              <td>${val.qty}</td>
+              <td><button onclick="deleteCart(${index})">Delete</button></td>
+            </tr>
+          `
+            )
+        })
+        return document.getElementById("renderCart").innerHTML = newArr.join('');
+    }
+
+    function deleteCart(index) {
+        console.log(index)
+        cart.splice(index, 1);
+        showCart();
+    }
+
+    function paymentButton() {
+        let total = 0
+        let newArr = cart.map((val) => {
+            return `
+            <p>${val.category} | ${val.name} |Rp. ${val.price} x ${val.qty} = Rp. ${val.price * val.qty}</p>
+       
+            `
+        })
+        for (var i = 0; i < cart.length; i++) {
+            total += cart[i].qty * cart[i].price
+        }
+        let tax = total * 0.10
+        let totall = total + tax
+        cart = []
+        showCart()
+        document.getElementById("transactionDetail").innerHTML = newArr.join("") +
+            `<h3>SubTotal: ${total}</h3> <h3>Tax: ${tax}</h3> <h3>Total: ${totall}</h3>`
+    }
+
+    function showCategories() {
+        var newArr = categoryProduct.map((val) => {
+            return (
+                `<option value="${val}">${val}</option>`
+            )
+        })
+        document.getElementById("categoryInput").innerHTML = newArr.join('');
+        document.getElementById("categoryFilter").innerHTML = newArr.join('');
+    }
+
+    function showList(arr, param) {
+        var newArr = arr.map((val, i) => {
+            if (i === param) {
+                return (
+                    `
+              <tr>
+                <td>${val.id}</td>
+                <td>${val.category}</td>
+                <td><input type="text" id="editName"></td>
+                <td><input type="text" id="editPrice"></td>
+                <td><input type="text" id="editStock"></td>
+                <td><button onclick="confirmEdit(${i})">Save</button></td>
+                <td><button onclick="cancelEdit()">Cancel</button></td>
+              </tr>
+            `
+                )
+            } else {
+                return (
+                    `
+              <tr>
+                <td>${val.id}</td>
+                <td>${val.category}</td>
+                <td>${val.name}</td>
+                <td>${val.price}</td>
+                <td>${val.stock}</td>
+                <td><button onclick="addToCart(${val.id})">Add</button></td>
+                <td><button onclick="deleteData(${i})">Delete</button></td>
+                <td><button onclick="editData(${i})">Edit</button></td>
+              </tr>
+            `
+                )
+            }
+        })
+        // console.log(newArr)
+        return document.getElementById("render").innerHTML = newArr.join('');
+    }
+
+    function editData(index) {
+        console.log(index)
+        showList(arrProduct, index)
+    }
+
+    function confirmEdit(index) {
+        var newName = document.getElementById("editName").value
+        var newPrice = document.getElementById("editPrice").value
+        var newStock = document.getElementById("editStock").value
+
+        arrProduct[index].name = newName
+        arrProduct[index].price = newPrice
+        arrProduct[index].stock = newStock
+
+        showList(arrProduct)
+
+
+    }
+
+    function cancelEdit() {
+        {
+            showList(arrProduct)
+        }
+    }
+
+    function deleteData(index) {
+        // Id filter
+        // 2 id yang mau di delete idProduct
+        // 1,2 3 4 id produk
+        // arrProduct = arrProduct.filter((val) => {
+        //   return val.id !== idProduct
+        // });
+        // showList(arrProduct);
+
+
+        // Index splice
+        console.log(arrProduct[index]);
+        arrProduct.splice(index, 1);
+        showList(arrProduct);
+    }
+
+    function addToList() {
+        var name = document.getElementById("nameInput").value;
+        var price = parseInt(document.getElementById("priceInput").value);
+        var stock = document.getElementById("stockInput").value;
+        var category = document.getElementById("categoryInput").value;
+
+        arrProduct.push({
+            id: new Date().getTime(),
+            name,
+            price,
+            stock,
+            category
+        })
+        showList(arrProduct);
+    }
+
+    function filterName() {
+        var nama = document.getElementById("keyword").value;
+        // ApPLe.. -> ambil value saay input nama diketik dan dijadikan variable nama
+        var nameSearchLower = nama.toLowerCase();
+        // apple -> variable nama tadi diconvert menjadi lowercase semua
+        var newArr = arrProduct.filter((val) => {
+            // Apple -> memfilter object
+            var namaProdLower = val.name
+                .toLowerCase(); // apple -> semua object nama diconvert menjadi huruf kecil dan dimasukkan ke variable namaProdLower
+            return namaProdLower.includes(nameSearchLower); //-> mereturn hasil dari 
+        })
+        console.log(newArr)
+        showList(newArr);
+    }
+
+    function filterHarga() {
+        var hargaMin = document.getElementById("min").value;
+        var hargaMax = document.getElementById("max").value;
+
+        if (hargaMin !== "" && hargaMax !== "") {
+            var newArr = arrProduct.filter((val) => {
+                return val.price >= hargaMin && val.price <= hargaMax
+            })
+            showList(newArr)
+        } else {
+            showList(arrProduct)
+        }
+    }
+
+    function filterKategori() {
+        var categoryFilter = document.getElementById("categoryFilter").value;
+        if (categoryFilter === "All") {
+            showList(arrProduct)
+        } else {
+            var newArr = arrProduct.filter((val) => {
+                return val.category === categoryFilter
+            })
+            showList(newArr)
+        }
+    }
+
+    showList(arrProduct);
+    showCategories();
+</script>
+
+</html>

@@ -1,0 +1,19 @@
+<script>
+    var jeruk = prompt("Masukkan Jumlah Jeruk @Rp. 10.000:");
+    var pepaya = prompt("Masukkan Jumlah Pepaya @Rp. 20.000:");
+    var semangka = prompt("Masukkan Jumlah Semangka @Rp. 30.000:");
+    
+    var totjeruk = jeruk * 10000;
+    var totpepaya = pepaya * 20000;
+    var totsemangka = semangka * 30000;
+    var grandtot = totjeruk + totpepaya + totsemangka;
+    var tax = 0.05;
+    var pajak = grandtot * tax;
+    var net = grandtot + pajak;
+    
+    alert("Jadi total belanjaannya adalah: " + "\n" +
+    jeruk + " Jeruk @Rp. 10000: Rp." + totjeruk +"\n" +
+    pepaya + " Pepaya @Rp. 20000: Rp." + totpepaya + "\n" +
+    semangka + " Semangka @Rp. 30000: Rp." + totsemangka + "\n"+
+    "GrandTotal: Rp." + grandtot + " Tax 5%: Rp." + pajak + " : Rp." + net);
+</script>

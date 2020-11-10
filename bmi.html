@@ -1,0 +1,23 @@
+<script>
+    let weight = prompt('Masukkan berat badan anda!')
+    let height = prompt('Masukkan tinggi badan anda')
+
+   let bmi = weight / Math.pow(height,2)
+   console.log(bmi)
+
+    if (bmi < 18.5){
+        alert('berat badan kurang');
+    }
+    else if (bmi >=18.5 && bmi <=24.9){
+        alert('berat badan ideal');
+    }
+    else if (bmi >=25.0 && bmi <=29.9){
+        alert('berat badan berlebih');
+    }
+    else if (bmi >=30.0 && bmi <=39.9){
+        alert('berat badan sangat berlebih');
+    }
+    else {
+        alert('Obese')
+    }
+</script>

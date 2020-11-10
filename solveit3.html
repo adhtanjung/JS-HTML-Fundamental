@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<script>
+		function carikalimat() {
+			var kalimat = document.getElementById("kalimat").value;
+			var kalimat2 = Array.from(kalimat);
+			var huruf = document.getElementById("hasil").value;
+			// console.log(kalimat.split(""));
+
+			console.log(kalimat2);
+			var totalhuruf = 0;
+			for (var i = 0; i < kalimat2.length; i++) {
+				if (kalimat[i] === huruf) {
+					totalhuruf += 1;
+				}
+			}
+			console.log(totalhuruf);
+			document.getElementById("output").innerHTML = "Hasilnya" + totalhuruf;
+		}
+	</script>
+	<body>
+		Ketik Kalimat:
+		<br />
+		<input type="text" id="kalimat" />
+		<br />
+		Karakter yang dicari:
+		<br />
+		<input type="text" id="hasil" />
+		<br />
+		<button onclick="carikalimat()">Cari!</button>
+		<h3 id="output"></h3>
+	</body>
+</html>

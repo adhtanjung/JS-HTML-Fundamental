@@ -1,0 +1,22 @@
+//filter
+var kata = "aaaabcdefg";
+var kataarr = kata.split("");
+// var arr = [1, 2, 3, 4, 5, 6];
+// var newArr = arr.filter(function (val) {
+// 	return val > 3;
+// });
+// // console.log(newArr);
+var newkata = kataarr.filter(function (val) {
+	return val === "a";
+});
+
+console.log(newkata);
+
+//arrow function
+
+// let pi = () => 3.14;
+
+// function pi() {
+// 	console.log(3.14);
+// }
+// console.log(pi());

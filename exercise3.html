@@ -1,0 +1,73 @@
+<script>
+    let qtyapple, qtygrape, qtyorange;
+    
+    qtyapple = 10
+    qtygrape = 12
+    qtyorange = 14
+
+    let priceApple, priceGrape, priceOrange;
+
+    priceApple = 10000
+    priceGrape = 20000
+    priceOrange = 15000
+    let apple;
+    let orange;
+    let grape;
+    
+    while(true){
+    
+        while(true){
+            apple = prompt('Input banyaknya apel \n \n' + 'stock: ' + qtyapple)
+            if (apple <= qtyapple){
+                break;
+            }
+            alert('Terjadi kesalahan')
+            
+        }
+         
+        while(true){
+            grape = prompt('Input banyaknya grape \n \n' + 'stock: ' + qtygrape)
+            if (grape <= qtygrape){
+                break;
+            }
+            alert('Terjadi kesalahan')
+            
+        }
+         
+        while(true){
+            orange = prompt('Input banyaknya orange \n \n' + 'stock: ' + qtyorange)
+            if (orange <= qtyorange){
+                break;
+            }
+            alert('Terjadi kesalahan')
+            
+        }
+            if(apple != 0 && grape != 0 && orange != 0){
+                break;
+            }
+        }
+    
+        let totalApple = apple * priceApple
+        let totalGrape = grape * priceGrape
+        let totalOrange = orange * priceOrange
+        let totalsemua = totalApple + totalGrape + totalOrange
+    
+        alert('Total belanjaan: \n\n' + 'Apple: ' + apple + ' x ' + priceApple + ':' + totalApple + '\n' +
+        'Grape: ' + grape + ' x ' + priceGrape + ':' + totalGrape + '\n' +
+        'Orange: ' + orange + ' x ' + priceOrange + ':' + totalOrange + '\n' + 'Total:Rp. ' + totalsemua)
+    
+        let bayar
+        while (true) {
+        bayar = prompt('Masukkan uangmu disini:Rp. ' + totalsemua)
+        if (bayar == totalsemua){
+             alert('Terimakasih Uangmu Pas')
+            break;
+         }else if (bayar > totalsemua){
+            alert('Terimakasih Uangmu lebih: Rp. ' + (bayar - totalsemua))
+            break;
+         }else{
+            alert('Uangmu kurang:Rp. ' + (bayar - totalsemua))
+            } 
+            }
+     
+</script>

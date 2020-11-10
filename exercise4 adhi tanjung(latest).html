@@ -1,0 +1,157 @@
+<script>
+    var fruits = ['Apel', 'Mangga', 'Durian']
+    var stock = [5, 7, 8]
+    var qty = [0, 0, 0]
+    var total = [0, 0, 0]
+    var price = [10000, 20000, 30000]
+
+    var condition = true
+    var totalnilaicondition = true
+    var totaluangcondition = true
+    var tambahbuahcondition = true
+    var hapuscondition = true
+    var confirm1;
+    var prompt1;
+
+    function tampilanmenu() {
+        let daftarmenu = 'Daftar Menu: \n\n' //bikin variabel ini cuma biar sederhana aja
+        for (vari = 0; i < buah.length; i++) {
+            daftarmenu += i + '. ' + buah[i] + ' | ' + stock[i] + ' | ' + 'Rp. ' + harga[i] + '/1pc\n'
+        }
+        alert(daftarmenu)
+    }
+
+    function adaSpace(s) { //bikin function kalau misalnya ada spasi
+        return s.indexOf(' ') >= 0;
+        // delete s;
+    }
+    do {
+        prompt1 = parseInt(prompt('Apa yang ingin anda lakukan? \n\n' +
+            '0. Menampilkan daftar buah\n' + '1. Menambah buah\n' + '2. Menghapus buah\n' + '3. Membeli buah'))
+        if (prompt1 === 0) {
+            let daftarmenu = 'Daftar Menu: \n\n'
+            for (vari = 0; i < buah.length; i++) {
+                daftarmenu += i + '. ' + buah[i] + ' | ' + stock[i] + ' | ' + 'Rp. ' + harga[i] + '/1pc\n'
+            }
+            alert(daftarmenu)
+
+        } else if (prompt1 === 1) {
+            do {
+                var buahnambah = prompt('Masukkan nama buah')
+                fruits.push(buahnambah)
+                var kuantitasnambah = prompt('Masukkan kuantitas')
+                stock.push(kuantitasnambah)
+                var harganambah = prompt('Masukkan harga')
+                price.push(harganambah)
+                if (buahnambah == '' && kuantitasnambah == '' && harganambah == '') {
+                    fruits.pop()
+                    stock.pop()
+                    price.pop()
+                    alert('Harus memasukkan value atau spasi tidak diizinkan, coba lagi')
+                    tambahbuahcondition = true
+                } else if (buahnambah == 0 && kuantitasnambah == 0 && harganambah == 0) {
+                    fruits.pop()
+                    stock.pop()
+                    price.pop()
+                    alert('Harus memasukkan value atau spasi tidak diizinkan, coba lagi')
+                    tambahbuahcondition = true
+                } else if (adaSpace(buahnambah) == true || adaSpace(kuantitasnambah) == true || adaSpace(harganambah) ==
+                    true) {
+                    fruits.pop()
+                    stock.pop()
+                    price.pop()
+                    tambahbuahcondition = true
+                    alert('Spasi tidak diizinkan, coba lagi')
+
+                } else {
+                    tambahbuahcondition = false
+                }
+            }
+            while (tambahbuahcondition);
+            var daftarmenu = 'Daftar Menu\n\n'
+            var menutambahbuah = ''
+            for (i = 0; i < fruits.length; i++) {
+                daftarmenu += [i] + '. ' + fruits[i] + ' | ' + stock[i] + ' | ' + price[i] + '\n'
+            }
+            alert(daftarmenu)
+        } else if (prompt1 === 2) {
+            do {
+                var daftarmenu = ''
+                for (i = 0; i < fruits.length; i++) {
+                    daftarmenu += [i] + '. ' + fruits[i] + ' | ' + stock[i] + ' | ' + price[i] + '\n'
+                }
+                var hapusbuah = prompt('Pilih no buah yang akan dihapus:\n\n' + daftarmenu)
+                if (hapusbuah == '') {
+                    alert('Masukkan No Buah')
+                } else if (adaSpace(hapusbuah) == true) {
+                    alert('Masukkan value dan atau spasi tidak diizinkan, coba ulangi')
+                } else if (hapusbuah > fruits.length - 1) {
+                    alert('Buah tidak ada')
+                } else {
+                    fruits.splice(hapusbuah, 1)
+                    stock.splice(hapusbuah, 1)
+                    price.splice(hapusbuah, 1)
+                    alert('Buah ' + hapusbuah + ' telah dihapus')
+                    hapuscondition = false
+                }
+            }
+            while (hapuscondition)
+        } else if (prompt1 === 3) {
+            do {
+                var totalnilai = 0;
+                for (var i = 0; i < fruits.length; i++) {
+                    qty[i] = prompt("Masukkan jumlah " + fruits[i] + "\n" + "Stock " + fruits[i] + ": " + stock[i]);
+                    while (qty[i] > stock[i] || qty[i] < 0 || qty[i] == "") {
+                        alert("Kuantitas tidak sesuai \nSisa stock " + fruits[i] + ": " + stock[i]);
+                        qty[i] = prompt("Masukkan jumlah " + fruits[i] + "\n" + "Stock " + fruits[i] + ": " + stock[
+                            i]);
+                    }
+                    totalnilai += qty[i];
+                    console.log(totalnilai)
+                }
+                if (totalnilai == 0) {
+                    alert('Minimal masukkan 1 nilai')
+                    totalnilaicondition = true
+                } else {
+                    alert('Berhasil melakukan transaksi')
+                    totalnilaicondition = false
+                }
+
+            } while (totalnilaicondition);
+            var totalPrice = 0
+            var totalBarang = ''
+            for (i = 0; i < fruits.length; i++) {
+                totalBarang += fruits[i] + ': ' + qty[i] + ' x ' + price[i] + ' = ' + (qty[i] * price[i]) + '\n';
+                totalPrice += (qty[i] * price[i]);
+            };
+            alert('Rincian Pembelanjaan\n\n' + totalBarang + '\n' + 'Total: Rp. ' + totalPrice)
+            do {
+                var bayar = prompt('Masukkan uang anda disni: Rp. ' + totalPrice)
+                if (bayar < totalPrice) {
+                    alert('Uang anda kurang: Rp. ' + (bayar - totalPrice))
+                    totaluangcondition = true
+
+                } else if (bayar >= totalPrice) {
+                    alert('Terimakasih, kembalianmu: ' + (bayar - totalPrice))
+                    totaluangcondition = false
+                }
+
+            }
+            while (totaluangcondition)
+        } else {
+
+            alert('Halaman tidak ditemukan / input salah.')
+        }
+        let kembali = confirm('Kembali ke halaman awal?')
+        if (kembali ==
+            true
+        ) { //ini penempatannya paling bawah, jadi apapun pilihan user pas disuruh milih mau menampilkan yang mana, akan selalu muncul pertanyaan kembali ke halaman awal?
+            condition = true
+        } else if (kembali == false) {
+            condition = false
+            alert('Terimakasih telah berkunjung!')
+
+        }
+    }
+    while (condition);
+</script>

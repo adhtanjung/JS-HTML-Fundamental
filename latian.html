@@ -1,0 +1,110 @@
+<!-- <script>
+    let qtyA, qtyB, qtyC;
+
+    qtyA = 4
+    qtyB = 7
+    qtyC = 3
+
+    let priceA, priceB, priceC;
+
+    priceA = 10000
+    priceB = 20000
+    priceC = 15000
+
+    let apple, banana, cherry; 
+
+    apple = prompt('Input amount of Apple you need @10K here: \n' + 'amount left: ' + qtyA)
+    while(apple > qtyA){
+        alert('There was a mistake')
+        apple = prompt('Input amount of Apple you need @10K here: \n' + 'amount left: ' + qtyA)
+    }
+
+    banana = prompt('Input amount of Banana you need @20K here: \n' + 'amount left: ' + qtyB)
+    while(banana > qtyB){
+        alert('There was a mistake')
+        banana = prompt('Input amount of Banana you need @20K here: \n' + 'amount left: ' + qtyB)
+    }
+
+    cherry = prompt('Input amount of Cherry you need @15K here: \n' + 'amount left: ' + qtyC)
+    while(cherry > qtyC){
+        alert('There was a mistake')
+        cherry = prompt('Input amount of Cherry you need @15K here: \n' + 'amount left: ' + qtqtyCyA)
+    }
+    while(apple == 0 && banana == 0 && cherry == 0 || apple <0 || banana <0 || cherry <0){
+        alert('Please input atleast 1(One) item into your cart or do not input negative number')
+        apple = prompt('Input amount of Apple you need @10K here: \n' + 'amount left: ' + qtyA)
+        while(apple > qtyA){
+        alert('There was a mistake')
+        apple = prompt('Input amount of Apple you need @10K here: \n' + 'amount left: ' + qtyA)
+    }
+    banana = prompt('Input amount of Banana you need @20K here: \n' + 'amount left: ' + qtyB)
+    while(banana > qtyB){
+        alert('There was a mistake')
+        banana = prompt('Input amount of Banana you need @20K here: \n' + 'amount left: ' + qtyB)
+    }
+
+    cherry = prompt('Input amount of Cherry you need @15K here: \n' + 'amount left: ' + qtyC)
+    while(cherry > qtyC){
+        alert('There was a mistake')
+        cherry = prompt('Input amount of Cherry you need @15K here: \n' + 'amount left: ' + qtqtyCyA)
+    }
+    }
+  
+
+    let totalA, totalB, totalC, grandtotal,  totalamount;
+    totalA = apple * priceA;
+    totalB = banana * priceB;
+    totalC = cherry * priceC;
+    grandtotal = totalA + totalB + totalC;
+
+    alert('Your cart \n\n' + 'Total Apple: ' + apple + ' x ' + priceA + ': ' + totalA + '\n' +
+    'Total Banana: ' + banana + ' x ' + priceB + ': ' + priceB + '\n' +
+    'Total Cherry: ' + cherry + ' x ' + priceC + ': ' + totalC + '\n' +
+    'Total money has to be paid: ' + grandtotal)
+    let payment;
+    payment = prompt('Pay here:Rp. ' + grandtotal) 
+    while(payment < grandtotal){
+        alert('Payment denied, please input the correct amount \n(' + (payment - grandtotal) + ')');
+        payment = prompt('Pay here:Rp. ' + grandtotal);    
+    }
+    if(payment > grandtotal){
+        alert('Payment accepted, here is your change: ' + (payment - grandtotal))
+    }else{
+        alert('Payment accepted, thank you')
+    }
+
+   
+
+
+        
+</script> -->
+
+<script>
+    let qtyA, qtyB, qtyC;
+
+    qtyA = 4
+    qtyB = 7
+    qtyC = 3
+
+    let priceA, priceB, priceC;
+
+    priceA = 10000
+    priceB = 20000
+    priceC = 15000
+
+    let apple, banana, cherry;
+    let condition = true
+
+    while (condition) {
+        apple = prompt('Masukkan apel disini')
+        if (apple > qtyA) {
+            alert('Masukkan kembali')
+            condition = true
+        } else if (apple < 0) {
+            alert('Masukkan angka positif')
+            condition = true
+        } else {
+            condition = false
+        }
+    }
+</script>

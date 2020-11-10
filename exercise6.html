@@ -1,0 +1,292 @@
+<script>
+    function kembalikemenu() { //function kembali ke menu
+        let kembali = confirm("Kembali ke halaman awal?");
+        if (kembali == true) {
+            condition = true;
+        } else if (kembali == false) {
+            condition = false;
+            alert("Terimakasih telah berkunjung!");
+        }
+    }
+
+    function tampilkanmenu() {
+        let daftarmenu = "Daftar Menu\n\n";
+
+        for (var i = 0; i < semuaproducts.length; i++) { //ngecek 1per1 
+            if (semuaproducts[i].category ==
+                1) { //ngecek 1 per 1 kalau kategorinya itu == 1, maka dijalankan loop yg spesifik
+                daftarmenu += (i + 1) + ". Name: " + semuaproducts[i].nama + " | stock: " + semuaproducts[i].stock +
+                    ' | ' +
+                    'Warranty: ' + semuaproducts[i].garansi + " | Harga: Rp. " + semuaproducts[i].harga + "\n";
+            } else if (semuaproducts[i].category == 2) {
+                daftarmenu += (i + 1) + ". Name: " + semuaproducts[i].nama + " | stock: " + semuaproducts[i].stock +
+                    ' | ' +
+                    'Sugarlvl: ' + semuaproducts[i].sugarlvl + " | Harga: Rp. " + semuaproducts[i].harga + "\n";
+            } else if (semuaproducts[i].category == 3) {
+                daftarmenu += (i + 1) + ". Name: " + semuaproducts[i].nama + " | stock: " + semuaproducts[i].stock +
+                    ' | ' +
+                    'Size: ' + semuaproducts[i].size + " | Harga: Rp. " + semuaproducts[i].harga + "\n";
+            } else if (semuaproducts[i].category == 4) {
+                daftarmenu += (i + 1) + ". Name: " + semuaproducts[i].nama + " | stock: " + semuaproducts[i].stock +
+                    ' | ' +
+                    'ExpDate: ' + semuaproducts[i].expdate + " | Harga: Rp. " + semuaproducts[i].harga + "\n";
+            }
+
+        }
+        return daftarmenu
+    }
+
+    function hasWhiteSpace(s) {
+        return s.indexOf(' ') >
+            0; // niatnya buat mendeteksi kalau ada spasi di dalam prompt, tapi bisa diganti sama function isNaN()
+    }
+    class Product {
+        constructor(_nama, _stock, _harga) {
+            this.nama = _nama;
+            this.stock = _stock;
+            this.harga = _harga;
+            this.qty = 0; //otomatis keisi qty = 0 
+            this.totalbelanja = 0; //otomatis keisi totalbelanja = 0
+        }
+    }
+
+    class Electronics extends Product {
+        constructor(_nama, _stock, _harga, _garansi) {
+            super(_nama, _stock, _harga);
+            this.category = 1; //otomatis keisi category = 1 
+            this.garansi = _garansi;
+        }
+    }
+    class Fruits extends Product {
+        constructor(_nama, _stock, _harga, _sugarlvl) {
+            super(_nama, _stock, _harga);
+            this.category = 2;
+            this.sugarlvl = _sugarlvl;
+        }
+    }
+    class Cloth extends Product {
+        constructor(_nama, _stock, _harga, _size) {
+            super(_nama, _stock, _harga);
+            this.category = 3;
+            this.size = _size;
+        }
+    }
+    class Fastfood extends Product {
+        constructor(_nama, _stock, _harga, _expdate) {
+            super(_nama, _stock, _harga);
+            this.category = 4;
+            this.expdate = _expdate;
+        }
+    }
+    let semuaproducts = [{
+            nama: 'Radio',
+            stock: 10,
+            harga: 500000,
+            garansi: 'Yes',
+            qty: 0,
+            totalbelanja: 0,
+            category: 1
+        },
+        {
+            nama: 'Anggur',
+            stock: 20,
+            harga: 10000,
+            sugarlvl: 'Low',
+            qty: 0,
+            totalbelanja: 0,
+            category: 2
+        },
+        {
+            nama: 'Kemeja',
+            stock: 200,
+            harga: 100000,
+            size: 'XL',
+            qty: 0,
+            totalbelanja: 0,
+            category: 3
+        },
+        {
+            nama: 'Burger',
+            stock: 100,
+            harga: 30000,
+            expdate: '01-11-2020',
+            qty: 0,
+            totalbelanja: 0,
+            category: 4
+        }
+    ]
+    let condition = false;
+    let conditiontambah = false
+
+    do {
+        let menuawal = parseInt(
+            prompt(
+                "Apa yang ingin anda lakukan?\n\n" +
+                "0. Menampilkan daftar produk\n" +
+                "1. Menambah produk\n" +
+                "2. Menghapus produk\n" +
+                "3. Membeli produk\n" +
+                "4. Keluar"
+            )
+        );
+        if (menuawal === 0) {
+            alert(tampilkanmenu());
+            kembalikemenu()
+        } else if (menuawal === 1) {
+            let pilihkategoricondition = false
+            do {
+                let pilihkategori = parseInt(prompt('Pilih Kategori Produk:\n\n' + '1. Elektronik\n' + '2. Buah\n' +
+                    '3. Pakaian\n' + '4. Fast Food'));
+                let masukNama = prompt('Masukkan nama')
+                let masukStock = prompt('Masukkan stock')
+                let masukHarga = prompt('Masukkan harga')
+                if (pilihkategori === 1) {
+                    let masukGaransi = prompt('Masukkan ketersediaan garansi\n(Yes/No)')
+                    if (masukNama == 0 && masukStock == 0 && masukHarga == 0 && masukGaransi == 0 || masukNama == '' ||
+                        masukStock == '' || masukHarga == '' || masukGaransi == '') {
+                        alert('Nilai tidak bisa kosong atau 0 semua')
+                    } else if (hasWhiteSpace(masukNama) == true || hasWhiteSpace(masukStock) == true ||
+                        hasWhiteSpace(masukHarga) == true || hasWhiteSpace(masukGaransi) == true) {
+                        alert('Input error, hindari penggunaan spasi')
+                    } else {
+                        semuaproducts.push(new Electronics(masukNama, masukStock, masukHarga, masukGaransi))
+                        pilihkategoricondition = false
+                    }
+                } else if (pilihkategori === 2) {
+                    let masukSugarlvl = prompt('Masukkan tingkat gula\n(Low-High)')
+                    if (masukNama == 0 && masukStock == 0 && masukHarga == 0 && masukSugarlvl == 0 || masukNama == '' ||
+                        masukStock == '' || masukHarga == '' || masukSugarlvl == '') {
+                        alert('Nilai tidak bisa kosong atau 0 semua')
+                    } else if (hasWhiteSpace(masukNama) == true || hasWhiteSpace(masukStock) == true ||
+                        hasWhiteSpace(masukHarga) == true || hasWhiteSpace(masukSugarlvl) == true) {
+                        alert('Input error, hindari penggunaan spasi')
+                    } else {
+                        semuaproducts.push(new Fruits(masukNama, masukStock, masukHarga, masukSugarlvl))
+                        pilihkategoricondition = false
+                    }
+                } else if (pilihkategori === 3) {
+                    let masukSize = prompt('Masukkan size\n(XS-XXL)')
+                    if (masukNama == 0 && masukStock == 0 && masukHarga == 0 && masukSize == 0 || masukNama == '' ||
+                        masukStock == '' || masukHarga == '' || masukSize == '') {
+                        alert('Nilai tidak bisa kosong atau 0 semua')
+                    } else if (hasWhiteSpace(masukNama) == true || hasWhiteSpace(masukStock) == true ||
+                        hasWhiteSpace(masukHarga) == true || hasWhiteSpace(masukSize) == true) {
+                        alert('Input error, hindari penggunaan spasi')
+                    } else {
+                        semuaproducts.push(new Cloth(masukNama, masukStock, masukHarga, masukSize))
+                        pilihkategoricondition = false
+                    }
+                } else if (pilihkategori === 4) {
+                    let masukExpdate = prompt('Masukkan expire date\n(DD-MM-YYYY)')
+                    if (masukNama == 0 && masukStock == 0 && masukHarga == 0 && masukExpdate == 0 || masukNama == '' ||
+                        masukStock == '' || masukHarga == '' || masukExpdate == '') {
+                        alert('Nilai tidak bisa kosong atau 0 semua')
+                    } else if (hasWhiteSpace(masukNama) == true || hasWhiteSpace(masukStock) == true ||
+                        hasWhiteSpace(masukHarga) == true || hasWhiteSpace(masukExpdate) == true) {
+                        alert('Input error, hindari penggunaan spasi')
+                    } else {
+                        semuaproducts.push(new Fastfood(masukNama, masukStock, masukHarga, masukExpdate))
+                        pilihkategoricondition = false
+                    }
+                } else {
+                    alert('Kategori tidak ditemukan')
+                    pilihkategoricondition = true
+                }
+            }
+            while (pilihkategoricondition)
+            alert(tampilkanmenu())
+            kembalikemenu()
+
+        } else if (menuawal === 2) {
+            let hapuscondition = false
+            do {
+                let hapusproduk = parseInt(prompt('Pilih produk yang ingin dihapus \n\n' + tampilkanmenu())) - 1
+                if (isNaN(hapusproduk) == true || hapusproduk < 0) {
+                    alert('Terjadi kesalahan, mohon input value yang benar')
+                    hapuscondition = true
+                } else if ((hapusproduk + 1) > semuaproducts
+                    .length) {
+                    alert('Produk tidak ditemukan')
+                    hapuscondition = true
+                } else {
+                    alert('Anda menghapus: ' + semuaproducts[hapusproduk].nama)
+                    semuaproducts.splice(hapusproduk, 1)
+                    hapuscondition = false
+                    alert(tampilkanmenu())
+                    kembalikemenu()
+                }
+            } while (hapuscondition)
+
+
+        } else if (menuawal === 3) {
+            belicondition = false
+            let beliproduk = 0 //produk yang ingin dibeli
+            // let beli = 0 //banyaknya produk yang dibeli
+            do {
+                beliproduk = parseInt(prompt('Pilih produk yang ingin dibeli \n\n' + tampilkanmenu())) - 1;
+                if (isNaN(beliproduk) == true || beliproduk < 0) {
+                    alert('Terjadi kesalahan, mohon diulangi kembali')
+                    belicondition = true
+                } else if ((beliproduk + 1) > semuaproducts.length) {
+                    alert('Produk tidak ditemukan')
+                    belicondition = true
+                } else {
+                    let jadibelicondition = false
+                    do {
+                        let beli = prompt('Masukkan jumlah ' + semuaproducts[beliproduk].nama +
+                            ' yang ingin dibeli: \n' +
+                            'Stock: ' + semuaproducts[beliproduk].stock + '\nHarga: ' + semuaproducts[beliproduk]
+                            .harga)
+                        semuaproducts[beliproduk].qty = beli
+                        if (beli > semuaproducts[beliproduk].stock) {
+                            alert('Stock tidak cukup')
+                            jadibelicondition = true
+                        } else {
+                            jadibelicondition = false
+                        }
+                    } while (jadibelicondition)
+                }
+                let belilagi = confirm('Kembali ke daftar produk?')
+                if (belilagi == true) {
+                    belicondition = true
+                } else {
+                    belicondition = false
+                }
+            }
+            while (belicondition)
+            var totalbeli = 'Detail Belanja\n\n'
+            var grandtotal = 0
+
+            for (var i = 0; i < semuaproducts.length; i++) {
+                if (semuaproducts[i].qty > 0) {
+                    totalbeli += semuaproducts[i].nama + ' : ' + semuaproducts[i].qty + ' x ' + semuaproducts[i].harga +
+                        ' = ' + (semuaproducts[i].qty * semuaproducts[i].harga) + '\n';
+                    grandtotal += (semuaproducts[i].qty * semuaproducts[i].harga)
+                }
+            }
+
+            alert(totalbeli + '\nTotal: Rp. ' + grandtotal)
+            var totaluangcondition = false
+            do {
+                var bayar = prompt('Masukkan uang anda disni: Rp. ' + grandtotal)
+                if (bayar < grandtotal) {
+                    alert('Uang anda kurang: Rp. ' + (bayar - grandtotal))
+                    totaluangcondition = true
+                } else if (bayar >= grandtotal) {
+                    alert(' Terimakasih, kembalianmu: ' + (bayar - grandtotal))
+                    totaluangcondition = false
+                }
+            }
+            while (totaluangcondition)
+            kembalikemenu()
+
+        } else if (menuawal === 4) {
+            condition = false
+
+        } else {
+            alert("Halaman tidak ditemukan");
+        }
+
+
+    } while (condition);
+</script>

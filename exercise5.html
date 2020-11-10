@@ -1,0 +1,157 @@
+<script>
+    function hasWhiteSpace(s) {
+        return s.indexOf(' ') >= 0;
+    }
+    let buah = [{
+        nama: 'Apel',
+        stock: 5,
+        harga: 8000,
+        qty: 0,
+        totalbelanjabuah: 0
+    },
+    {
+        nama: 'Mangga',
+        stock: 10,
+        harga: 12000,
+        qty: 0,
+        totalbelanjabuah: 0
+    },
+    {
+        nama: 'Melon',
+        stock: 3,
+        harga: 30000,
+        qty: 0,
+        totalbelanjabuah: 0
+    }
+    ]
+    class buahbuahan {
+        constructor(_nama, _stock, _harga, _qty, _totalbelanjabuah) {
+            this.nama = _nama;
+            this.stock = _stock;
+            this.harga = _harga;
+            this.qty = _qty;
+            this.totalbelanjabuah = _totalbelanjabuah;
+        }
+    }
+    var condition = true
+    var conditionmasuk = true
+    var totalnilaicondition = true
+    var hapuscondition = true
+
+    function tampikanmenu() {
+        var daftarmenu = 'Daftar Buah: \n' //bikin variabel ini cuma biar sederhana aja
+        for (i = 0; i < buah.length; i++) {
+            daftarmenu += i + '. ' + buah[i].nama + ' | ' + buah[i].stock + ' | ' + 'Rp. ' + buah[i].harga + '/1pc\n'
+        }
+        alert(daftarmenu)
+    }
+    do {
+        let menuawal = parseInt(prompt('Apa yang ingin anda lakukan?\n\n' +
+            //bikin tampilan awal berbentuk prompt, isinya string semua
+            '0. Menampilkan daftar buah\n' +
+            '1. Menambah buah\n' +
+            '2. Menghapus buah\n' +
+            '3. Membeli buah\n'))
+
+        if (menuawal === 0) {
+            tampikanmenu()
+
+        } else if (menuawal === 1) {
+            do {
+                var masukBuah = prompt('Masukkan nama buah')
+                var masukStock = prompt('Masukkan banyak buah')
+                var masukHarga = prompt('Masukkan harga buah')
+
+                if (masukBuah == '' && masukStock == '' && masukHarga == '' || masukBuah == 0 && masukStock == 0 &&
+                    masukHarga == 0) {
+                    alert('Harus memasukkan nilai yang sesuai, mengulangi')
+                } else if (hasWhiteSpace(masukBuah) == true || hasWhiteSpace(masukStock) == true || hasWhiteSpace(
+                    masukHarga) == true) {
+                    alert('Harus memasukkan nilai yang benar, mengulangi')
+                } else {
+                    buah.push(new buahbuahan(masukBuah, masukStock, masukHarga, 0, 0))
+                    conditionmasuk = false
+                }
+            }
+            while (conditionmasuk);
+            tampikanmenu()
+        } else if (menuawal === 2) {
+            do {
+                var daftarmenu = 'Daftar Buah: \n' //bikin variabel ini cuma biar sederhana aja
+                for (i = 0; i < buah.length; i++) {
+                    daftarmenu += i + '. ' + buah[i].nama + ' | ' + buah[i].stock + ' | ' + 'Rp. ' + buah[i].harga +
+                        '/1pc\n'
+                }
+                let hapusbuah = prompt('Pilih no buah yang ingin dihapus\n\n' + daftarmenu)
+                if (hapusbuah == '') {
+                    hapuscondition = true
+                    alert('Tidak boleh kosong, coba ulangi')
+                } else if (hasWhiteSpace(hapusbuah) == true) {
+                    alert('Spasi tidak diizinkan, coba ulangi')
+                    hapuscondition = true
+                } else if (hapusbuah > buah.length - 1) {
+                    alert('Buah tidak ada')
+                } else {
+                    buah.splice(hapusbuah, 1)
+                    alert('Anda menghapus buah no: ' + hapusbuah)
+                    tampikanmenu()
+                    hapuscondition = false
+                }
+            } while (hapuscondition)
+        } else if (menuawal === 3) {
+            do {
+                var totalnilai = 0;
+                for (var i = 0; i < buah.length; i++) {
+                    buah[i].qty = prompt("Masukkan jumlah " + buah[i].nama + "\n" + "Stock " + buah[i].nama + ": " +
+                        buah[i].stock);
+                    while (buah[i].qty > buah[i].stock || buah[i].qty < 0 || buah[i].qty == "") {
+                        alert("Kuantitas tidak sesuai \nSisa stock " + buah[i].nama + ": " + buah[i].stock);
+                        buah[i].qty = prompt("Masukkan jumlah " + buah[i].nama + "\n" + "Stock " + buah[i].nama + ": " +
+                            buah[i].stock);
+                    }
+                    totalnilai += buah[i].qty;
+                }
+                if (totalnilai == 0) {
+                    alert('Minimal masukkan 1 nilai')
+                    totalnilaicondition = true
+                } else {
+                    alert('Berhasil melakukan transaksi')
+                    totalnilaicondition = false
+                }
+            } while (totalnilaicondition);
+            var totalPrice = 0
+            var totalBarang = ''
+            for (i = 0; i < buah.length; i++) {
+                totalBarang += buah[i].nama + ': ' + buah[i].qty + ' x ' + buah[i].harga + ' = ' + (buah[i].qty * buah[
+                    i].harga) + '\n';
+                totalPrice += (buah[i].qty * buah[i].harga);
+            }
+            alert('Rincian Pembelanjaan\n\n' + totalBarang + '\n' + 'Total: Rp. ' + totalPrice)
+            do {
+                var bayar = prompt('Masukkan uang anda disni: Rp. ' + totalPrice)
+                if (bayar < totalPrice) {
+                    alert('Uang anda kurang: Rp. ' + (bayar - totalPrice))
+                    totaluangcondition = true
+                } else if (bayar >= totalPrice) {
+                    alert('Terimakasih, kembalianmu: ' + (bayar - totalPrice))
+                    totaluangcondition = false
+                }
+            }
+            while (totaluangcondition)
+        } else {
+            alert('Halaman tidak ditemukan.')
+        }
+        let kembali = confirm('Kembali ke halaman awal?')
+        if (kembali ==
+            true
+        ) { //ini penempatannya paling bawah, jadi apapun pilihan user pas disuruh milih mau menampilkan yang mana, akan selalu muncul pertanyaan kembali ke halaman awal?
+            condition = true
+        } else if (kembali == false) {
+            condition = false
+            alert('Terimakasih telah berkunjung!')
+        }
+    }
+    while (
+        condition
+    ); //condition ini akan dicek, jika conditionnya == true, maka syntaxnya akan ulang lagi dariawal, jika conditionnya ==false maka akan berenti
+</script>

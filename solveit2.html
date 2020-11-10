@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<script>
+		function kuadrat() {
+			var hasilkuadrat = 0;
+			hasilkuadrat = document.getElementById("Num").value;
+			var hasilkuadrat2 = 0;
+			hasilkuadrat2 = document.getElementById("Num2").value;
+			var total = Math.pow(hasilkuadrat, hasilkuadrat2);
+			// var hasil = 'Hasil ' + hasilkuadrat + "<sup>2</sup>" + ' = ' + hasilkuadrat2
+
+			document.getElementById("output").innerHTML =
+				"hasil " + hasilkuadrat + "<sup>" + hasilkuadrat2 + "</sup> = " + total;
+			console.log(hasilkuadrat2);
+		}
+	</script>
+	<body>
+		Masukkan angka:
+		<br />
+		<input type="number" id="Num" />
+		<br />
+		<br />
+		<input type="number" id="Num2" />
+		<br />
+		<button onclick="kuadrat()">Kuadratkan!</button>
+		<h3 id="output"></h3>
+	</body>
+</html>

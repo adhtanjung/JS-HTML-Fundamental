@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<script>
+		function onButtonClick() {
+			var intro = "Nama saya ";
+
+			var hasil = document.getElementById("namaDepan").value;
+			intro += hasil;
+			console.log(intro);
+			document.getElementById("namaDepan").value = "";
+
+			var usia = document.getElementById("Usia").value;
+			intro += ", " + usia + " Tahun";
+			document.getElementById("Usia").value = "";
+
+			var gender = document.getElementsByName("gender");
+			if (gender[0].checked) {
+				intro += ", " + gender[0].value;
+			} else {
+				intro += ", " + gender[1].value;
+			}
+
+			document.getElementById("output").innerHTML = intro;
+		}
+
+		function onBtnhobby() {}
+	</script>
+
+	<body>
+		Nama: <input type="text" id="namaDepan" placeholder="Namamu" />
+		<br />
+		<br />
+		Usia: <input type="number" id="Usia" />
+		<br />
+		<br />
+		<input type="radio" name="gender" value="Pria" checked /> Pria
+		<input type="radio" name="gender" value="Wanita" /> Wanita
+		<br />
+		<input type="checkbox" name="hobby" id="a1" value="" />
+		<button onclick="onButtonClick()">Click Me!</button>
+
+		<button>Hobby</button>
+		<p id="output">Result</p>
+	</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 9 Adhtanjung</title>
+    <style>
+        table,
+        tr,
+        td,
+        th,
+        tbody {
+            border: 1px solid black;
+            border-collapse: collapse;
+            border-spacing: 15px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <form onclick="return false">
+        <fieldset>
+            <legend>
+                Filter
+            </legend>
+            <p>
+                Nama: <input type="text" id="filterName" oninput="FilterNama()">
+                Harga: <input type="number" id="filterHarga" oninput="FilterHarga()"> -
+                <input type="number" id="filterHarga2" oninput="FilterHarga()">
+                <br>
+                <br>
+                Category: <select id="kategori2" oninput="FilterKategori()">
+                    <option value="Electronic">Elektronik</option>
+                    <option value="Fruit">Buah</option>
+                    <option value="Cloth">Pakaian</option>
+                    <option value="Fast Food">Fast Food</option>
+                </select>
+            </p>
+        </fieldset>
+
+    </form>
+    <form onclick="return false">
+        <fieldset>
+            <legend>Input data</legend>
+            <table>
+                <tr>
+                    <td>
+                        Nama:
+                        <input type="text" id="nama" placeholder="Nama" />
+
+                        Harga:
+                        <input type="number" id="harga" placeholder="Harga" />
+
+                        Kategori:
+                        <select id="kategori">
+                            <option value="Electronic">Elektronik</option>
+                            <option value="Fruit">Buah</option>
+                            <option value="Cloth">Pakaian</option>
+                            <option value="Fast Food">Fast Food</option>
+                        </select>
+                        Stock:
+                        <input type="number" id="stock" placeholder="Stock" />
+                    </td>
+                </tr>
+                <table>
+                    <button onclick="tambahproduk()">Input</button>
+                </table>
+            </table>
+        </fieldset>
+    </form>
+    <form onclick="return false">
+        <fieldset>
+            <legend>Tabel Data</legend>
+            <table>
+                <thead>
+                    <center>
+                        <tr>
+                            <th>Id</th>
+                            <th>Category</th>
+                            <th>nama</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                </thead>
+                </center>
+                <tbody id="output">
+                    <tr>
+                        <td>1604472455843</td>
+                        <td>Fast Food</td>
+                        <td>Noodle</td>
+                        <td>5000</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>1604472511635</td>
+                        <td>Electronic</td>
+                        <td>Handphone</td>
+                        <td>50000000</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>1604472518074</td>
+                        <td>Cloth</td>
+                        <td>Hoodie</td>
+                        <td>300000</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td>1604472518443</td>
+                        <td>Fruit</td>
+                        <td>Apple</td>
+                        <td>10000</td>
+                        <td>200</td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+</body>
+<script>
+    let product = [{
+            id: 1604472455843,
+            kategori: "Fast Food",
+            nama: "Noodle",
+            harga: 5000,
+            stock: 10
+        },
+        {
+            id: 1604472511635,
+            kategori: "Electronic",
+            nama: "Handphone",
+            harga: 50000000,
+            stock: 15
+        },
+        {
+            id: 1604472518074,
+            kategori: "Cloth",
+            nama: "Hoodie",
+            harga: 300000,
+            stock: 13
+        },
+        {
+            id: 1604472518443,
+            kategori: "Fruit",
+            nama: "Apple",
+            harga: 10000,
+            stock: 200
+        }
+    ];
+
+    function tambahproduk() {
+        let nama = document.getElementById("nama").value;
+        let harga = parseInt(document.getElementById("harga").value);
+        let kategori = document.getElementById("kategori").value;
+        let stock = document.getElementById('stock').value
+        var newdate = new Date();
+        var id = newdate.getTime();
+        product.push({
+            id,
+            kategori,
+            nama,
+            harga,
+            stock
+        });
+        tambahkan(product);
+    }
+
+    // Function jadi dinamis karna bisa menggunakan function berulang2 tergantung parameter array yang masuk
+    function tambahkan(arr) {
+        let output = arr.map(function (val) {
+            return `
+            <tr>
+                <td>${val.id}</td>
+                <td>${val.kategori}</td>
+                <td>${val.nama}</td>
+                <td>${val.harga}</td>
+                <td>${val.stock}</td>
+            </tr>
+        `
+        })
+        return document.getElementById("output").innerHTML = output.join('');
+    }
+
+    function FilterHarga() {
+        let filterharga = document.getElementById('filterHarga').value
+        let filterharga2 = document.getElementById('filterHarga2').value;
+        let newArr = product.filter(function (val) {
+            return val.harga >= filterharga && val.harga <= filterharga2
+        })
+        console.log(newArr)
+        tambahkan(newArr)
+    }
+
+    function FilterNama() {
+        let filternama = document.getElementById('filterName').value;
+        let newArr = product.filter(function (val) {
+            return val.nama.includes(filternama)
+        })
+        tambahkan(newArr)
+    }
+
+    function FilterKategori() {
+        let filterkategori = document.getElementById('kategori2').value
+        let newArr = product.filter(function (val) {
+            return val.kategori === filterkategori
+        })
+        console.log(newArr)
+        tambahkan(newArr)
+    }
+</script>
+
+</html>

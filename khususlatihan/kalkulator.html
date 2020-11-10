@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1,
+        table,
+        form,
+        p,
+        th {
+            text-align: center;
+            border: 1px solid black;
+
+            border-width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <table>
+            <thead>
+                <th>
+                    Kalkulator Sederhana
+                </th>
+            </thead>
+            <tbody>
+                <td>
+
+                    <p>
+                        <br>
+                        Num 1: <input type="number" id="Num1" placeholder="Inpur your number here">
+                        <br>
+                        <br>
+                        Num 2: <input type="number" id="Num2" placeholder="Inpur your number here">
+                        <br><br>
+                        <button onclick="tambah()">Add + </button>
+                        <button onclick="kurang()">Substract - </button>
+                        <button onclick="bagi()">Divide by / </button>
+                        <br>
+                        <br>
+                        <button onclick="kali()">Multiply x </button>
+                        <button onclick="modulo()">Modulus % </button>
+                        <button onclick="pangkat()">Power of ^ </button>
+                        <h3 id="output"></h3>
+                    </p>
+                </td>
+                <br>
+            </tbody>
+        </table>
+
+    </center>
+</body>
+<script>
+    function tambah() {
+        let value1 = parseInt(document.getElementById('Num1').value)
+        let value2 = parseInt(document.getElementById('Num2').value)
+        let hasil = value1 + value2
+        let hasil2 = `Hasil ${value1} + ${value2} = ${hasil}`
+        return document.getElementById("output").innerHTML = hasil2
+    }
+
+    function kurang() {
+        let value1 = parseInt(document.getElementById('Num1').value)
+        let value2 = parseInt(document.getElementById('Num2').value)
+        let hasil = value1 - value2
+        let hasil2 = `Hasil ${value1} - ${value2} = ${hasil}`
+        return document.getElementById("output").innerHTML = hasil2
+    }
+
+    function bagi() {
+        let value1 = parseInt(document.getElementById('Num1').value)
+        let value2 = parseInt(document.getElementById('Num2').value)
+        let hasil = value1 / value2
+        let hasil2 = `Hasil ${value1} / ${value2} = ${hasil}`
+        return document.getElementById("output").innerHTML = hasil2
+    }
+
+    function kali() {
+        let value1 = parseInt(document.getElementById('Num1').value)
+        let value2 = parseInt(document.getElementById('Num2').value)
+        let hasil = value1 * value2
+        let hasil2 = `Hasil ${value1} x ${value2} = ${hasil}`
+        return document.getElementById("output").innerHTML = hasil2
+    }
+
+    function modulo() {
+        let value1 = parseInt(document.getElementById('Num1').value)
+        let value2 = parseInt(document.getElementById('Num2').value)
+        let hasil = value1 % value2
+        let hasil2 = `Hasil ${value1} % ${value2} = ${hasil}`
+        return document.getElementById("output").innerHTML = hasil2
+    }
+
+    function pangkat() {
+        let value1 = parseInt(document.getElementById('Num1').value)
+        let value2 = parseInt(document.getElementById('Num2').value)
+        let hasil = Math.pow(value1, value2)
+        let hasil2 = `Hasil ${value1}<sup>${value2}</sup>  = ${hasil}`
+        return document.getElementById("output").innerHTML = hasil2
+    }
+</script>
+
+</html>

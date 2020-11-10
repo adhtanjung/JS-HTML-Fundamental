@@ -1,0 +1,131 @@
+<script>
+    let priceApple = 10000
+    let priceGrape = 20000
+    let priceOrange = 30000
+
+    let stockApple = 10
+    let stockGrape = 12
+    let stockOrange = 17
+
+    let apple = prompt('Input banyaknya apel \n \n' + 'stock: ' + stockApple)
+    if (apple > stockApple) {
+        alert('Maaf permintaan anda melebihi stock apel: ' + stockApple)
+        apple = null
+    }
+    let grape = prompt('Input banyaknya grape \n \n' + 'stock: ' + stockGrape)
+    if (grape > stockGrape) {
+        alert('Maaf permintaan anda melebihi stock grape: ' + stockGrape)
+        grape = null
+    }
+    let orange = prompt('Input banyaknya orange \n \n' + 'stock: ' + stockOrange)
+    if (orange > stockOrange) {
+        alert('Maaf permintaan anda melebihi stock orange: ' + stockOrange)
+        orange = null
+    }
+    if (apple === null && grape === null && orange === null) {
+        alert('Pesanan anda tidak dapat diproses')
+    } else if (apple == 0 && grape == 0 && orange == 0) {
+        alert('Masukkan minimal 1 item')
+
+    } else if (apple <= 0 || grape <= 0 || orange <= 0) {
+        alert('Angka harus bernilai positif')
+    } else {
+        let belanjaApple = apple * priceApple
+        let belanjaGrape = grape * priceGrape
+        let belanjaOrange = orange * priceOrange
+        let totalbelanja = belanjaApple + belanjaGrape + belanjaOrange
+
+        alert('Jadi total belajaan anda adalah: \n \n' + 'Apple ' + apple + 'x' + priceApple + ' : ' + 'Rp. ' +
+            belanjaApple +
+            '\n' + 'Grape ' + grape + 'x' + priceGrape + ' : ' + 'Rp. ' + belanjaGrape +
+            '\n' + 'Orange ' + orange + 'x' + priceOrange + ' : ' + 'Rp. ' + belanjaOrange +
+            '\n' + 'Total belanja: ' + 'Rp. ' + totalbelanja)
+
+        let bayar = prompt('Masukkan uangmu')
+
+        if (bayar < totalbelanja) {
+            alert('Uang tidak mencukupi, transaksi dibatalkan: ' + (bayar - totalbelanja))
+        } else if (bayar < 0) {
+            alert('Transaksi Anda tidak bisa diproses')
+        } else if (bayar > totalbelanja) {
+            alert('Kembalianmu: ' + 'Rp. ' + (bayar - totalbelanja))
+        } else {
+            alert('Terimakasih telah membayar dengan uang pas')
+        }
+    }
+
+
+    // let belanjaApple = apple * priceApple
+    // let belanjaGrape = grape * priceGrape
+    // let belanjaOrange = orange * priceOrange
+    // let totalbelanja = belanjaApple + belanjaGrape + belanjaOrange
+
+    // if(apple <= stockApple && apple > 0 && grape >0 && grape <= stockGrape && orange > 0 && orange <= stockOrange){
+    // alert('Jadi total belajaan anda adalah: \n \n' + 'Apple ' + apple + 'x' + priceApple + ' : ' + 'Rp. ' + belanjaApple + 
+    // '\n' + 'Grape ' + grape + 'x' + priceGrape + ' : ' + 'Rp. ' + belanjaGrape +
+    // '\n' + 'Orange ' + orange + 'x' + priceOrange + ' : ' + 'Rp. ' + belanjaOrange +
+    // '\n' + 'Total belanja: ' + totalbelanja)
+    // let bayar = prompt('Masukkan uangmu')
+    // if (bayar < totalbelanja){
+    //     alert('Uangmu kurang: ' + (bayar - totalbelanja))
+    // }else if(bayar < 0){
+    //     alert('Transaksi Anda tidak bisa diproses')
+    // }else if(bayar > totalbelanja){
+    //     alert('Uangmu lebih: ' + (bayar - totalbelanja))
+    // }else{
+    //     alert('Terimakasih')
+    // }}    
+
+
+    // if (apple, grape, orange <= stockApple, stockGrape, stockOrange)
+
+    // let grape = prompt('Input banyaknya grape \n \n' + 'stock: ' + stockGrape)
+    // let orange = prompt('Input banyaknya apel \n \n' + 'stock: ' + stockOrange)
+
+
+
+    // if (apple > stockApple){
+    //     alert('Maaf permintaan anda melebihi stock apel: ' + stockApple)
+    // }else if{
+    //     let grape = prompt('Input banyaknya grape \n \n' + 'stock: ' + stockGrape)
+    // }
+
+    // if (grape > stockGrape){
+    //     alert('Maaf permintaan anda melebihi stock apel: ' + stockApple)
+    // }else{
+    //     let orange = prompt('Input banyaknya apel \n \n' + 'stock: ' + stockOrange)
+    // }
+
+
+
+    // if (apple > stockApple){
+    //     alert('Maaf permintaan anda melebihi stock apel: ' + stockApple)
+    // }
+    // let orange = prompt('Input banyaknya orange \n \n' + 'stock: ' + stockOrange)
+
+    // if (orange > stockOrange){
+    //     alert('Maaf permintaan anda melebihi stock orange: ' + stockOrange)
+
+    // if (apple <= stockApple){
+    //     let grape = prompt('Input banyaknya grape \n \n' + "stock: " + stockGrape)
+    // }   else if (apple > stockApple){
+    //     alert('Maaf anda permintaan anda melebihi stock apel: ' + stockApple)
+    // }   else if (grape <= stockGrape){
+    //     let orange = prompt('Input banyaknya orange \n \n' + "stock: " + stockOrange)
+    // }
+
+    // if (apple > stockApple){
+    //     alert("Maaf anda permintaan anda melebihi stock apel: " + stockApple)
+    // }
+    // else{let grape = prompt('Input banyaknya grape \n \n' + "stock: " + stockGrape)
+
+    // }
+
+    // if (grape > stockGrape){
+    //     alert('Maaf anda permintaan anda melebihi stock grape: ' + stockGrape)
+    // else{let orange = prompt('Input banyaknya orange \n \n' + "stock: " + stockOrange}
+    // }
+    // let grape = prompt('Input banyaknya grape \n \n' + "stock: " + stockGrape )
+
+    // let orange = prompt('Input banyaknya orange \n \n' + "stock: " + stockOrange )
+</script>
