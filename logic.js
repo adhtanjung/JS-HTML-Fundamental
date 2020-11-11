@@ -167,3 +167,4 @@ console.log(equal(["abc", "abc", "abc", "def", 1]));
 console.log(equal(["abc", "abc", "abc", "abc", "abc"]));
 console.log(equal([1, 1, 1]));
 console.log(equal([1, 1, 1, "abc"]));
+//baru
