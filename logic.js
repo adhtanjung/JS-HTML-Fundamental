@@ -70,20 +70,66 @@
 // console.log(removeFirstLast("Bambang"));
 // console.log(removeFirstLast("ABC"));
 
-function questionMark(str) {
-	let q = 0;
-	str = str.split("");
-	for (let index = 0; index < str.length; index++) {
-		if (str[index] == "?") {
-			q++;
-		}
-	}
-	if (q > 0) {
-		return q;
+// function questionMark(str) {
+// 	let q = 0;
+// 	str = str.split("");
+// 	for (let index = 0; index < str.length; index++) {
+// 		if (str[index] == "?") {
+// 			q++;
+// 		}
+// 	}
+// 	if (q > 0) {
+// 		return q;
+// 	} else {
+// 		return "Tidak ada tanda tanya";
+// 	}
+// }
+// console.log(questionMark("??????asdasda"));
+// console.log(questionMark("asdadsa"));
+// console.log(questionMark("??"));
+
+function berapaTahun(pAwal, perc, pendatang, target) {
+	let tahun = 0;
+	perc = perc / 100;
+	do {
+		//INI PAKE DO WHILE
+		pAwal += pAwal * perc + pendatang;
+		tahun++;
+	} while (pAwal < target);
+	return `Waktu yang dibutuhkan untuk mencapai target adalah: ${tahun} Tahun`;
+	// let tahun = 0;
+	// perc = perc / 100;
+	// for (let i = 0; pAwal < target; i++) { //INI PAKE FOR LOOP
+	// 	pAwal += pAwal * perc + pendatang;
+	// 	tahun++;
+	// }
+	// return tahun;
+}
+console.log(berapaTahun(1000, 2, 50, 1200));
+console.log(berapaTahun(1500, 5, 100, 5000));
+console.log(berapaTahun(1500000, 2.5, 10000, 2000000));
+// 	let pendudukTotal = pAwal; //1000
+//
+// 	let persentase = pendudukTotal * perc; //70
+// 	let pTotal = pendudukTotal + persentase + pendatang; //1070
+//
+// 	for (let i = 0; pTotal < target; i++) {
+// 		pTotal += pTotal * perc + pendatang;
+// 		tahun++;
+// 		// pTotal += ditambah;
+// 		// console.log(pendudukTotal, pTotal);
+// 	}
+// 	return tahun + " Tahun";
+
+function everyArr(arr1, arr2) {
+	arr1 = arr1.join("");
+	arr2 = arr2.join("");
+	if (arr1 === arr2) {
+		return true;
 	} else {
-		return "Tidak ada tanda tanya";
+		return false;
 	}
 }
-console.log(questionMark("??????asdasda"));
-console.log(questionMark("asdadsa"));
-console.log(questionMark("??"));
+// console.log(everyArr([1, 2, 4], [1, 2, 3]));
+// console.log(everyArr([1, 2, 3], [1, 2, 3]));
+// console.log(everyArr([4, 4, 4], [4, 4, 4]));
