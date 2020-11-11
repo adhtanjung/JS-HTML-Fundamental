@@ -105,9 +105,9 @@ function berapaTahun(pAwal, perc, pendatang, target) {
 	// }
 	// return tahun;
 }
-console.log(berapaTahun(1000, 2, 50, 1200));
-console.log(berapaTahun(1500, 5, 100, 5000));
-console.log(berapaTahun(1500000, 2.5, 10000, 2000000));
+// console.log(berapaTahun(1000, 2, 50, 1200));
+// console.log(berapaTahun(1500, 5, 100, 5000));
+// console.log(berapaTahun(1500000, 2.5, 10000, 2000000));
 // 	let pendudukTotal = pAwal; //1000
 //
 // 	let persentase = pendudukTotal * perc; //70
@@ -133,3 +133,37 @@ function everyArr(arr1, arr2) {
 // console.log(everyArr([1, 2, 4], [1, 2, 3]));
 // console.log(everyArr([1, 2, 3], [1, 2, 3]));
 // console.log(everyArr([4, 4, 4], [4, 4, 4]));
+
+// function equal(arr) {
+// 	for arr === arr[0];
+// }
+// console.log(equal([1, 1, 1, 1]));
+
+// function equal(array) {
+// 	let cekvalue = array.filter((val) => {
+// 		return val === val[0];
+// 	});
+// 	return cekvalue;
+// }
+// console.log(equal([1, 1, 1, 2]));
+
+// const allEqual = (arr) => arr.every((v) => v === arr[0]);
+// console.log(allEqual(["abc", "abdc"])); // false
+
+function equal(arr) {
+	let arrai = [];
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] === arr[0]) {
+			arrai.push(arr[i]);
+		}
+	}
+	if (arrai.length == arr.length) {
+		return true;
+	} else {
+		return false;
+	}
+}
+console.log(equal(["abc", "abc", "abc", "def", 1]));
+console.log(equal(["abc", "abc", "abc", "abc", "abc"]));
+console.log(equal([1, 1, 1]));
+console.log(equal([1, 1, 1, "abc"]));
