@@ -76,3 +76,47 @@
 
 // console.log(coloredCircle);
 // comment123
+let bintang = "";
+
+//KOTAK
+// for (let i = 0; i < 5; i++) {
+// 	for (let j = 0; j < 5; j++) {
+// 		bintang += "*";
+// 	}
+// 	bintang += "\n";
+// }
+
+//SEGITIGA1
+// for (let i = 1; i <= 5; i++) {
+// 	for (let j = 0; j < i; j++) {
+// 		bintang += "*";
+// 	}
+// 	bintang += "\n";
+// }
+
+//SEGITIGA2
+// for (let i = 0; i < 5; i++) {
+// 	for (let j = 5; j > i; j--) {
+// 		bintang += "*";
+// 	}
+// 	bintang += "\n";
+// }
+//SEGITIGA3
+for (let i = 0; i < 5; i++) {
+	for (let j = 5; j > i; j--) {
+		bintang += " ";
+	}
+	for (let n = 0; n <= i; n++) {
+		bintang += "*";
+	}
+	for (let m = 0; m < 2; m++) {
+		bintang += " ";
+	}
+	for (let k = 0; k <= i; k++) {
+		bintang += "*";
+	}
+
+	bintang += "\n";
+}
+
+console.log(bintang);

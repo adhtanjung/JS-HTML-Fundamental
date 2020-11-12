@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <input type="text" id='userName' placeholder="Username">
+        <input type="password" id='passWord' placeholder="Password">
+        <button onclick="loginButton()">Login</button>
+        <h3 id="output"></h3>
+    </center>
+</body>
+<script>
+    let user = [{
+        name: 'Adhi',
+        password: 'abc123'
+    }, {
+        name: 'Tanjung',
+        password: '123'
+    }]
+
+
+    function loginButton() {
+        let username = document.getElementById('userName').value
+        let password = document.getElementById('passWord').value
+        let input = user.filter((val) => {
+            return val.name.includes(username)
+        })
+        if (input) {
+            if (password == input[0].password) {
+                return document.getElementById('output').innerHTML = `
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Activity</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </table>
+                <p>Login sebagai: ${input[0].name}</p>`
+            } else if (password !== input.password) {
+                return document.getElementById('output').innerHTML = `User tidak terdaftar/password salah`
+            }
+        }
+    }
+</script>
+
+</html>

@@ -124,15 +124,16 @@ function berapaTahun(pAwal, perc, pendatang, target) {
 function everyArr(arr1, arr2) {
 	arr1 = arr1.join("");
 	arr2 = arr2.join("");
+	console.log(arr1, arr2);
 	if (arr1 === arr2) {
 		return true;
 	} else {
 		return false;
 	}
 }
-// console.log(everyArr([1, 2, 4], [1, 2, 3]));
-// console.log(everyArr([1, 2, 3], [1, 2, 3]));
-// console.log(everyArr([4, 4, 4], [4, 4, 4]));
+console.log(everyArr([1, 2, 4], [1, 2, 3]));
+console.log(everyArr([1, 2, 3], [1, 2, 3]));
+console.log(everyArr([4, 4, 4], [4, 4, 4]));
 
 // function equal(arr) {
 // 	for arr === arr[0];
@@ -163,8 +164,7 @@ function equal(arr) {
 		return false;
 	}
 }
-console.log(equal(["abc", "abc", "abc", "def", 1]));
-console.log(equal(["abc", "abc", "abc", "abc", "abc"]));
-console.log(equal([1, 1, 1]));
-console.log(equal([1, 1, 1, "abc"]));
-//baru
+// console.log(equal(["abc", "abc", "abc", "def", 1])); //false
+// console.log(equal(["abc", "abc", "abc", "abc", "abc"])); //true
+// console.log(equal([1, 1, 1])); //true
+// console.log(equal([1, 1, 1, "abc"])); //false

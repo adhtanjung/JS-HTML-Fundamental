@@ -6,11 +6,11 @@ var kataarr = kata.split("");
 // 	return val > 3;
 // });
 // // console.log(newArr);
-var newkata = kataarr.filter(function (val) {
-	return val === "a";
-});
+// var newkata = kataarr.filter(function (val) {
+// 	return val === "a";
+// });
 
-console.log(newkata);
+// console.log(newkata);
 
 //arrow function
 
@@ -20,3 +20,10 @@ console.log(newkata);
 // 	console.log(3.14);
 // }
 // console.log(pi());
+
+let x = 5;
+let y = 10;
+console.log(y > x ? "y lebih besar dari x" : "y lebih kecil dari x");
+
+var contoh = y > x ? true : false;
+console.log(contoh);
