@@ -1,0 +1,109 @@
+<script>
+    var prBl = 50000;
+    var prAc = 45000;
+    var pr3d = 60000;
+    var stokBl = 2;
+    var stokAC = 5;
+    var stok3D = 1;
+    var qtBl, qtAc, qt3d, trx, a, x;
+
+    do {
+        do {
+            qtBl = prompt(
+                "Custom Casing Blackmatte (50000 IDR)\n" +
+                "stok : " + stokBl + '\n\n' +
+                "Masukkan jumlah barang : ");
+            if (qtBl >= 0 && qtBl <= stokBl) {
+                trx = true;
+                a = 1;
+            } else if (qtBl < 0 || qtBl > stokBl) {
+                trx = false;
+                a = 0;
+                if (trx == false) {
+                    alert('Mohon maaf terjadi kesalahan input T_T\nSilakan masukkan data Anda kembali ^^');
+                }
+            }
+        } while (a == 0);
+
+        do {
+            qtAc = prompt(
+                "Custom Casing Anticrack (45000 IDR)\n" +
+                "stok : " + stokAC + '\n\n' +
+                "Masukkan jumlah barang : ");
+            if (qtAc >= 0 && qtAc <= stokAC) {
+                trx = true;
+                a = 1;
+            } else if (qtAc < 0 || qtAc > stokAC) {
+                trx = false;
+                a = 0;
+                if (trx == false) {
+                    alert('Mohon maaf terjadi kesalahan input T_T\nSilakan masukkan data Anda kembali ^^');
+                }
+            }
+        } while (a == 0);
+
+        do {
+            qt3d = prompt(
+                "Custom Casing 3D Full Print (60000 IDR)\n" +
+                "stok : " + stok3D + '\n\n' +
+                "Masukkan jumlah barang : ");
+            if (qt3d >= 0 && qt3d <= stok3D) {
+                trx = true;
+                a = 1;
+            } else if (qt3d < 0 || qt3d > stok3D) {
+                trx = false;
+                a = 0;
+                if (trx == false) {
+                    alert('Mohon maaf terjadi kesalahan input T_T\nSilakan masukkan Anda data kembali ^^');
+                }
+            }
+        } while (a == 0);
+        x = 1;
+        if ((qtBl == 0) && (qtAc == 0) && (qt3d == 0)) {
+            trx = false;
+            if (trx == false) {
+                x = 0;
+                alert('Mohon maaf Transaksi telah dibatalkan karena kesalahan dalam input T_T');
+            }
+        }
+    } while (x == 0)
+
+    qtBl = parseInt(qtBl);
+    qtAc = parseInt(qtAc);
+    qt3d = parseInt(qt3d);
+
+    var resBl = prBl * qtBl;
+    var resAc = prAc * qtAc;
+    var res3d = pr3d * qt3d;
+    var result = resBl + resAc + res3d;
+    var tax = result * 0.05;
+    var result1 = result + tax;
+
+    alert(
+        "Casing Blackmatte " + qtBl + " x " + prBl + " = " + resBl +
+        "\nCasing Anticrack " + qtAc + " x " + prAc + " = " + resAc +
+        "\nCasing 3D Full Print " + qt3d + " x " + pr3d + " = " + res3d +
+        "\n\nTotal Harga adalah " + resBl + " + " + resAc + " + " + res3d + " + " + tax + " (5% pajak) = " +
+        result1 + " IDR"
+    );
+
+    var pay, b;
+    b = false;
+    do {
+        pay = prompt("Masukkan jumlah uang Anda : ");
+        if (pay == result1) {
+            b = true;
+            alert("Terima kasih telah berbelanja di toko kami ^^");
+        } else if (pay < result1) {
+            b = false;
+            alert(
+                "Mohon maaf tranksaksi telah dibatalkan. Disini ga boleh ngutang!!\n" +
+                "Uang Anda kurang sebesar : " + (pay - result1) + " IDR");
+        } else {
+            b = true;
+            alert(
+                "Terima kasih telah berbelanja di toko kami ^^\n" +
+                "Total kembalian Anda adalah " + (pay - result1) + " IDR");
+        }
+    } while (b == false);
+</script>
