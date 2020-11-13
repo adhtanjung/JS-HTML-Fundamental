@@ -80,6 +80,16 @@
 					<thead id="tableHeadCart"></thead>
 					<tbody id="tableBodyCart"></tbody>
 				</table>
+				<p id="payment"></p>
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend>Payment</legend>
+			<form onclick="return false">
+				<table>
+					<h2>Transaction Detail</h2>
+					<p id="paymentOutput"></p>
+				</table>
 			</form>
 		</fieldset>
 	</body>
@@ -258,6 +268,8 @@
 		                  </tr>`;
 			});
 			document.getElementById("tableBodyCart").innerHTML = output.join("");
+			document.getElementById("payment").innerHTML = `
+		          <button onclick="paymentButton()">Payment</button>`;
 		}
 		function addToCart(value) {
 			let produkInCart = produkCart.find((val) => {
@@ -296,6 +308,30 @@
 				showCart();
 				showProducts(products);
 			}
+		}
+		function paymentButton() {
+			let subTotal = 0;
+			for (let i = 0; i < produkCart.length; i++) {
+				subTotal += produkCart[i].qty * produkCart[i].price;
+			}
+			let tax = subTotal * 0.1;
+			let grandTotal = subTotal + tax;
+			let output = produkCart.map((val) => {
+				return `
+                      ${val.type} | ${val.name} | ${val.qty} x ${val.price} : ${
+					val.qty * val.price
+				}<br><br>`;
+			});
+			console.log(output);
+			document.getElementById("paymentOutput").innerHTML =
+				output.join("") +
+				`
+            <h3>SubTotal: ${subTotal}</h3>
+            <h4>Tax: ${tax}</h4>
+            <h3>GrandTotal: ${grandTotal}</h3>`;
+			document.getElementById("tableHeadCart").innerHTML = ``;
+			document.getElementById("tableBodyCart").innerHTML = ``;
+			document.getElementById("payment").innerHTML = ``;
 		}
 
 		showProducts(products);
