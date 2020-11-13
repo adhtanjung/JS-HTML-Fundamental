@@ -73,36 +73,6 @@
     <th colspan=2>Action</th>
     </tr>`
 
-    function showListAdmin() {
-        let output = kegiatan.map((val, i) => {
-            return `
-            <tr>
-                <td>${i+1}</td>
-                <td>${val.nama}</td>
-                <td>${val.hari}</td>
-                <td><img src="${val.gambar}" alt="Img not found" width='100px' height='100px'></td>
-                <td>
-                    <button onclick="editButton(${i})">Edit</button>
-                    </td>
-                   <td> <button onclick="deleteButton(${i})">Delete</button></td>
-            </tr>`
-        })
-        return document.getElementById('aktivitas').innerHTML = output.join('')
-    }
-
-    function showListUser() {
-        let output = kegiatan.map((val, i) => {
-            return `
-            <tr>
-                <td>${i+1}</td>
-                <td>${val.nama}</td>
-                <td>${val.hari}</td>
-                <td><img src="${val.gambar}" alt="Img not found" width='100px' height='100px'></td>
-                
-            </tr>`
-        })
-        return document.getElementById('aktivitas').innerHTML = output.join('')
-    }
 
 
 
@@ -148,7 +118,7 @@
         let aktif = kegiatan[index].nama
         let day = kegiatan[index].hari
         let url = kegiatan[index].gambar
-        // let url2 = `<img src="${url}">`
+        console.log(day)
         let output = kegiatan.map((val, i) => {
             if (index === i) {
                 return document.getElementById('aktivitas').innerHTML = `
@@ -157,6 +127,9 @@
                 <td>${i+1}</td>
                 <td><input type='text' value='${aktif}' id='aktivitaS'></input></td>
                 <td><select id="gantiHari">
+                    <option value="none" selected disabled hidden>
+                        Pilih hari
+                    </option>
                         <option value="Senin">Senin</option>
                         <option value="Selasa">Selasa</option>
                         <option value="Rabu">Rabu</option>
@@ -174,6 +147,7 @@
                 <tr>
                     <td>${i+1}</td>
                     <td>${val.nama}</td>
+                    <td>${val.hari}</td>
                     <td><img src="${val.gambar}" alt="Img not found" width='100px' height='100px'></td>
                     <td>
                         <button onclick="editButton(${i})">Edit</button>
@@ -225,6 +199,7 @@
 
     function deleteButton(index) {
         delete kegiatan[index]
+        panjang--
         showlistMain()
     }
     let panjang = kegiatan.length
@@ -245,6 +220,38 @@
         document.getElementById('tablehead').innerHTML = ``
     }
 
+    function showListAdmin() {
+        let output = kegiatan.map((val, i) => {
+            return `
+    <tr>
+        <td>${i+1}</td>
+        <td>${val.nama}</td>
+        <td>${val.hari}</td>
+        <td><img src="${val.gambar}" alt="Img not found" width='100px' height='100px'></td>
+        <td>
+            <button onclick="editButton(${i})">Edit</button>
+        </td>
+        <td> <button onclick="deleteButton(${i})">Delete</button></td>
+    </tr>`
+        })
+        return document.getElementById('aktivitas').innerHTML = output.join('')
+    }
+
+    function showListUser() {
+        let output = kegiatan.map((val, i) => {
+            return `
+    <tr>
+        <td>${i+1}</td>
+        <td>${val.nama}</td>
+        <td>${val.hari}</td>
+        <td><img src="${val.gambar}" alt="Img not found" width='100px' height='100px'></td>
+
+    </tr>`
+        })
+        return document.getElementById('aktivitas').innerHTML = output.join('')
+    }
+
+
 
     function showlistMain() {
         document.getElementById('tablehead').innerHTML = `<tr'>
@@ -264,6 +271,9 @@
             <td><input type='text' id='addNama'></input></td>
             <td>
                 <select id="hari">
+                    <option value="none" selected disabled hidden>
+                        Pilih hari
+                    </option>
                     <option value="Senin">Senin</option>
                     <option value="Selasa">Selasa</option>
                     <option value="Rabu">Rabu</option>
