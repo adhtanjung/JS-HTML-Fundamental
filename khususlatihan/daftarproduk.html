@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Daftar Produk</title>
+		<style>
+			table,
+			th,
+			td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+		</style>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend>Filter Produk</legend>
+			<form onclick="return false">
+				<table>
+					<table>
+						<td>
+							Filter Huruf:
+							<input type="text" id="filterWords" />
+							<br /><br />
+							Filter Harga:
+							<input type="number" id="filterPriceMin" placeholder="Minimum" />
+							-
+							<input type="number" id="filterPriceMax" placeholder="Maksimum" />
+							<br /><br />
+							<button onclick="filterButton()">Submit</button>
+						</td>
+					</table>
+					<br />
+
+					<button>Harga > 100000</button>
+					<br /><br />
+					<button>Harga < 100000</button>
+
+					<br /><br />
+				</table>
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend>Input Produk</legend>
+			<form onclick="return false">
+				<table>
+					Type:
+					<select id="inputType">
+						<option value="none" selected disabled hidden>Type</option>
+						<option value="Fruit">Fruit</option>
+						<option value="Electronic">Electronic</option>
+						<option value="Clothing">Clothing</option>
+						<option value="Fast Food">Fast Food</option>
+					</select>
+					Name:
+					<input type="text" id="inputName" />
+					Stock:
+					<input type="number" id="inputStock" />
+					Price:
+					<input type="number" id="inputPrice" />
+					<button onclick="submitInput()">Submit</button>
+				</table>
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend>Daftar Produk</legend>
+			<form onclick="return false">
+				<table>
+					<thead id="tableHead"></thead>
+					<tbody id="tableBody"></tbody>
+				</table>
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend>Cart</legend>
+			<form onclick="return false">
+				<table>
+					<thead id="tableHeadCart"></thead>
+					<tbody id="tableBodyCart"></tbody>
+				</table>
+			</form>
+		</fieldset>
+	</body>
+
+	<script>
+		let randNum = Math.floor(Math.random() * 1000000 + 1);
+		console.log(randNum);
+
+		let products = [
+			{
+				id: 178782,
+				type: "Fruit",
+				name: "Coconut",
+				stock: 55,
+				price: 12000,
+			},
+			{
+				id: 953441,
+				type: "Electronic",
+				name: "Radio",
+				stock: 15,
+				price: 100000,
+			},
+			{
+				id: 731371,
+				type: "Clothing",
+				name: "Sweater",
+				stock: 25,
+				price: 50000,
+			},
+			{
+				id: 579960,
+				type: "Fast Food",
+				name: "French Fries",
+				stock: 35,
+				price: 20000,
+			},
+		];
+		function showProducts(arr) {
+			let output = "";
+			document.getElementById("tableHead").innerHTML = `
+		          <tr>
+		              <th>ID</th>
+		              <th>Type</th>
+		              <th>Name</th>
+		              <th>Stock</th>
+		              <th>Price</th>
+		              <th colspan=3>Action</th>
+		          </tr>`;
+			output = arr.map((val, i) => {
+				return `
+		              <tr>
+		                  <td>${val.id}</td>
+		                  <td>${val.type}</td>
+		                  <td>${val.name}</td>
+		                  <td>${val.stock}</td>
+		                  <td>${val.price}</td>
+		                  <td><button onclick="addToCart(${val.id})">AddToCart</button></td>
+		                  <td><button onclick="editProduct(${i})">Edit</button></td>
+		                  <td><button onclick="deleteProduct(${i})">Delete</button></td>
+		              </tr>`;
+			});
+			return (document.getElementById("tableBody").innerHTML = output.join(""));
+		}
+		console.log(products);
+
+		function filterButton() {
+			let filterhuruf = document.getElementById("filterWords").value;
+			filterhuruf = filterhuruf.toLowerCase();
+			let filterhargamin = parseInt(
+				document.getElementById("filterPriceMin").value
+			);
+			let filterhargamax = parseInt(
+				document.getElementById("filterPriceMax").value
+			);
+
+			let output1 = products.filter((val) => {
+				if (val.name.toLowerCase().includes(filterhuruf)) {
+					return val;
+				}
+			});
+			let output2 = output1.filter((val) => {
+				if (val.price >= filterhargamin && val.price <= filterhargamax) {
+					return val;
+				}
+			});
+
+			showProducts(output2);
+		}
+		function submitInput() {
+			let inputType = document.getElementById("inputType").value;
+			let inputName = document.getElementById("inputName").value;
+			let inputStock = document.getElementById("inputStock").value;
+			let inputPrice = document.getElementById("inputPrice").value;
+			products.push({
+				id: Math.floor(Math.random() * 1000000 + 1),
+				type: inputType,
+				name: inputName,
+				stock: inputStock,
+				price: inputPrice,
+			});
+			showProducts(products);
+		}
+		function editProduct(index) {
+			let editproduct = products[index];
+			console.log(editproduct);
+			if (editproduct) {
+				let editproduct2 = `
+		              <tr>
+		                  <td></td>
+		                  <td>
+		                      <select id="editType">
+						<option value="none" selected disabled hidden>Type</option>
+						<option value="Fruit">Fruit</option>
+						<option value="Electronic">Electronic</option>
+						<option value="Clothing">Clothing</option>
+						<option value="Fast Food">Fast Food</option>
+		                  </select>
+		                  </td>
+		                  <td><input type="text" id="editName" value=${editproduct.name}></td>
+		                  <td><input type="number" id="editStock" value=${editproduct.stock}></td>
+		                  <td><input type="number" id="editPrice" value=${editproduct.price}></td>
+		                  <td><button onclick="saveEdit(${index})">Save</button>
+		                      <button onclick="cancelEdit()">Cancel</button></td>
+
+
+		              </tr>
+		              `;
+				// console.log(editproduct2);
+				document.getElementById("tableBody").innerHTML =
+					editproduct2 + showProducts(products);
+			} else {
+				showProducts(products);
+			}
+		}
+		function saveEdit(index) {
+			let editType = document.getElementById("editType").value;
+			let editName = document.getElementById("editName").value;
+			let editStock = document.getElementById("editStock").value;
+			let editPrice = document.getElementById("editPrice").value;
+
+			products[index] = {
+				id: products[index].id,
+				type: editType,
+				name: editName,
+				stock: editStock,
+				price: editPrice,
+			};
+			showProducts(products);
+		}
+		function cancelEdit() {
+			showProducts(products);
+		}
+		function deleteProduct(index) {
+			delete products[index];
+			showProducts(products);
+		}
+		let produkCart = [];
+		function showCart() {
+			document.getElementById("tableHeadCart").innerHTML = `
+		                    <tr>
+		                        <th>ID</th>
+		                        <th>Type</th>
+		                        <th>Name</th>
+		                        <th>Qty</th>
+		                        <th>Price</th>
+		                    </tr>`;
+			let output = produkCart.map((val) => {
+				return `
+		                  <tr>
+		                      <td>${val.id}</td>
+		                      <td>${val.type}</td>
+		                      <td>${val.name}</td>
+		                      <td>${val.qty}</td>
+		                      <td>${val.price}</td>
+		                  </tr>`;
+			});
+			document.getElementById("tableBodyCart").innerHTML = output.join("");
+		}
+		function addToCart(value) {
+			let produkInCart = produkCart.find((val) => {
+				return val.id === value;
+			});
+			console.log(produkInCart);
+			let produkIndex = produkCart.findIndex((val) => {
+				return val.id === value;
+			});
+			console.log(value);
+
+			console.log(produkIndex);
+
+			if (produkInCart) {
+				let productKurang = products.findIndex((val) => {
+					return val.id === value;
+				});
+				console.log(productKurang);
+				if (products[productKurang].stock === 0) {
+					alert("Stock Habis");
+				} else {
+					produkCart[produkIndex].qty++;
+					products[productKurang].stock--;
+					showCart();
+					showProducts(products);
+				}
+			} else {
+				let productKurang = products.findIndex((val) => {
+					return val.id === value;
+				});
+				products[productKurang].stock--;
+				let productBaru = products.find((val) => {
+					return val.id === value;
+				});
+				produkCart.push({ ...productBaru, qty: 1 });
+				showCart();
+				showProducts(products);
+			}
+		}
+
+		showProducts(products);
+	</script>
+</html>

@@ -66,19 +66,19 @@
 // let arr2 = [{ job: "pelukis", gender: "pria" }];
 // // let arr3 = { ...arr, ...arr2 };
 // console.log(arr3);
-const circle = [
-	{
-		radius: 10,
-	},
-];
-const coloredCircle = [
-	{
-		...circle,
-		color: "black",
-	},
-];
+// const circle = [
+// 	{
+// 		radius: 10,
+// 	},
+// ];
+// const coloredCircle = [
+// 	{
+// 		...circle,
+// 		color: "black",
+// 	},
+// ];
 
-console.log(coloredCircle);
+// console.log(coloredCircle);
 // comment123
 // let bintang = "";
 
@@ -124,3 +124,10 @@ console.log(coloredCircle);
 // }
 
 // console.log(bintang);
+
+// let num = Math.floor(Math.random() * 100000 + 1);
+// console.log(num);
+
+let waktu = new Date();
+let num = waktu.getTime();
+console.log(num);
