@@ -21,7 +21,9 @@
         <input type="text" id='userName' placeholder="Username">
         <input type="password" id='passWord' placeholder="Password">
         <button onclick="loginButton()">Login</button>
-        <table id="aktivitas">
+        <table>
+            <thead id='tablehead'></thead>
+            <tbody id='aktivitas'></tbody>
         </table>
         <p id="output"></p>
 
@@ -63,7 +65,7 @@
         )
     ]
     console.log(kegiatan)
-    let header = `<tr id='tableHead'>
+    let header = `<tr'>
     <th>ID</th>
     <th>Activity</th>
     <th>Day</th>
@@ -94,10 +96,9 @@
             <tr>
                 <td>${i+1}</td>
                 <td>${val.nama}</td>
+                <td>${val.hari}</td>
                 <td><img src="${val.gambar}" alt="Img not found" width='100px' height='100px'></td>
-                <td>
-                  
-                </td>
+                
             </tr>`
         })
         return document.getElementById('aktivitas').innerHTML = output.join('')
@@ -117,21 +118,23 @@
                 if (input[0].role == 'admin') {
                     showlistMain()
 
-                    return document.getElementById('output').innerHTML += `Login sebagai: ${input[0].name}(admin)
+                    return document.getElementById('output').innerHTML = `Login sebagai: ${input[0].name}(admin)
                     <p><button
                         onclick="logOut()">Logout</button></p>`
                 } else if (input[0].role == 'user') {
-                    document.getElementById('aktivitas').innerHTML = `
-                    <tr>
+                    document.getElementById('tablehead').innerHTML = `<tr>
                         <th>ID</th>
                         <th>Activity</th>
+                        <th>Day</th>
                         <th>Image</th>
                         <th colspan=2>Action</th>
-                    </tr>
+                    </tr>`
+                    document.getElementById('aktivitas').innerHTML = `
+                    
                     ${showListUser()}
                     `
                     return document.getElementById('output').innerHTML =
-                        `Login sebagai: ${input[0].name}<button onclick="logOut()">Logout</button>`
+                        `Login sebagai: ${input[0].name}(user)<p><button onclick="logOut()">Logout</button></p>`
 
                 }
             } else if (password !== input.password) {
@@ -145,15 +148,15 @@
         let aktif = kegiatan[index].nama
         let day = kegiatan[index].hari
         let url = kegiatan[index].gambar
-        let url2 = `<img src="${url}">`
+        // let url2 = `<img src="${url}">`
         let output = kegiatan.map((val, i) => {
             if (index === i) {
-                return document.getElementById('tableHead').innerHTML += `
+                return document.getElementById('aktivitas').innerHTML = `
                 
                 <tr>
                 <td>${i+1}</td>
-                <td><input type='text' placeholder='${aktif}' id='aktivitaS'></input></td>
-                <td><select id="hari">
+                <td><input type='text' value='${aktif}' id='aktivitaS'></input></td>
+                <td><select id="gantiHari">
                         <option value="Senin">Senin</option>
                         <option value="Selasa">Selasa</option>
                         <option value="Rabu">Rabu</option>
@@ -161,7 +164,7 @@
                         <option value="Jumat">Jumat</option>
                         <option value="Sabtu">Sabtu</option>
                     </select></td>
-                <td><input type='text' placeholder='${url2}' id='urlGambar'></input></td>
+                <td><input type='text' value='${url}' id='urlGambar'></input></td>
                 <td><button onclick='saveEdit(${i})'>Save</button></td>
                 <td><button onclick='cancelEdit()'>Cancel</button></td>
                 </tr>`
@@ -181,7 +184,24 @@
                 </tr>`
             }
         })
-        return document.getElementById('aktivitas').innerHTML = output.join('')
+        return document.getElementById('aktivitas').innerHTML = output.join('') + `<tr>
+            <td>
+                ${panjang+1}
+            </td>
+            <td><input type='text' id='addNama'></input></td>
+            <td>
+                <select id="hari">
+                    <option value="Senin">Senin</option>
+                    <option value="Selasa">Selasa</option>
+                    <option value="Rabu">Rabu</option>
+                    <option value="Kamis">Kamis</option>
+                    <option value="Jumat">Jumat</option>
+                    <option value="Sabtu">Sabtu</option>
+                </select>
+            </td>
+            <td><input type='text' id="addUrl"></input></td>
+            <td><button onclick="addButton()">Add</button></td>
+        </tr>`
 
 
     }
@@ -189,8 +209,10 @@
     function saveEdit(index) {
         let outputAktivitas = document.getElementById('aktivitaS').value
         let outputUrl = document.getElementById('urlGambar').value
+        let outputHari = document.getElementById('gantiHari').value
         kegiatan[index].nama = outputAktivitas
         kegiatan[index].gambar = outputUrl
+        kegiatan[index].hari = outputHari
         console.log(kegiatan)
         console.log(outputAktivitas)
         showlistMain()
@@ -205,11 +227,13 @@
         delete kegiatan[index]
         showlistMain()
     }
+    let panjang = kegiatan.length
 
     function addButton() {
         let namaAkt = document.getElementById('addNama').value
         let namaHari = document.getElementById('hari').value
         let namaUrl = document.getElementById('addUrl').value
+        panjang++
         let tambah = new Activity(namaAkt, namaHari, namaUrl)
         kegiatan.push(tambah)
         showlistMain()
@@ -218,14 +242,25 @@
     function logOut() {
         document.getElementById('aktivitas').innerHTML = ``
         document.getElementById('output').innerHTML = ``
+        document.getElementById('tablehead').innerHTML = ``
     }
 
+
     function showlistMain() {
+        document.getElementById('tablehead').innerHTML = `<tr'>
+            <th>ID</th>
+            <th>Activity</th>
+            <th>Day</th>
+            <th>Image</th>
+            <th colspan=2>Action</th>
+            </tr>`
         document.getElementById('aktivitas').innerHTML = `
-        ${header}
 
         ${showListAdmin()}
         <tr>
+            <td>
+                ${panjang+1}
+            </td>
             <td><input type='text' id='addNama'></input></td>
             <td>
                 <select id="hari">
