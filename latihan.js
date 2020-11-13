@@ -66,17 +66,21 @@
 // let arr2 = [{ job: "pelukis", gender: "pria" }];
 // // let arr3 = { ...arr, ...arr2 };
 // console.log(arr3);
-// const circle = {
-// 	radius: 10,
-// };
-// const coloredCircle = {
-// 	...circle,
-// 	color: "black",
-// };
+const circle = [
+	{
+		radius: 10,
+	},
+];
+const coloredCircle = [
+	{
+		...circle,
+		color: "black",
+	},
+];
 
-// console.log(coloredCircle);
+console.log(coloredCircle);
 // comment123
-let bintang = "";
+// let bintang = "";
 
 //KOTAK
 // for (let i = 0; i < 5; i++) {
@@ -102,21 +106,21 @@ let bintang = "";
 // 	bintang += "\n";
 // }
 //SEGITIGA3
-for (let i = 0; i < 5; i++) {
-	for (let j = 5; j > i; j--) {
-		bintang += " ";
-	}
-	for (let n = 0; n <= i; n++) {
-		bintang += "*";
-	}
-	for (let m = 0; m < 2; m++) {
-		bintang += " ";
-	}
-	for (let k = 0; k <= i; k++) {
-		bintang += "*";
-	}
+// for (let i = 0; i < 5; i++) {
+// 	for (let j = 5; j > i; j--) {
+// 		bintang += " ";
+// 	}
+// 	for (let n = 0; n <= i; n++) {
+// 		bintang += "*";
+// 	}
+// 	for (let m = 0; m < 2; m++) {
+// 		bintang += " ";
+// 	}
+// 	for (let k = 0; k <= i; k++) {
+// 		bintang += "*";
+// 	}
 
-	bintang += "\n";
-}
+// 	bintang += "\n";
+// }
 
-console.log(bintang);
+// console.log(bintang);
