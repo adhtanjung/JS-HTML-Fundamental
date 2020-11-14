@@ -96,7 +96,7 @@
 
 	<script>
 		let randNum = Math.floor(Math.random() * 1000000 + 1);
-		console.log(randNum);
+		// console.log(randNum);
 
 		let products = [
 			{
@@ -154,7 +154,7 @@
 			});
 			return (document.getElementById("tableBody").innerHTML = output.join(""));
 		}
-		console.log(products);
+		// console.log(products);
 
 		function filterButton() {
 			let filterhuruf = document.getElementById("filterWords").value;
@@ -194,42 +194,58 @@
 			showProducts(products);
 		}
 		function editProduct(index) {
-			let editproduct = products[index];
-			console.log(editproduct);
-			if (editproduct) {
-				let editproduct2 = `
-		              <tr>
-		                  <td></td>
-		                  <td>
-		                      <select id="editType">
-						<option value="none" selected disabled hidden>Type</option>
-						<option value="Fruit">Fruit</option>
-						<option value="Electronic">Electronic</option>
-						<option value="Clothing">Clothing</option>
-						<option value="Fast Food">Fast Food</option>
-		                  </select>
-		                  </td>
-		                  <td><input type="text" id="editName" value=${editproduct.name}></td>
-		                  <td><input type="number" id="editStock" value=${editproduct.stock}></td>
-		                  <td><input type="number" id="editPrice" value=${editproduct.price}></td>
-		                  <td><button onclick="saveEdit(${index})">Save</button>
-		                      <button onclick="cancelEdit()">Cancel</button></td>
+			let output = products.map((val, i) => {
+				if (index === i) {
+					console.log(index, i);
+					console.log(val.name);
+					return `
+							<tr>
+								<td>
 
+								</td>
+							  	<td>
+									<select id="editType">
+										<option value="none" selected disabled hidden>Type</option>
+										<option value="Fruit">Fruit</option>
+										<option value="Electronic">Electronic</option>
+										<option value="Clothing">Clothing</option>
+										<option value="Fast Food">Fast Food</option>
+							  		</select>
+							  	</td>
+							  	<td><input type="text" id="editName" value=${val.name}></td>
+							  	<td><input type="number" id="editStock" value=${val.stock}></td>
+							  	<td><input type="number" id="editPrice" value=${val.price}></td>
+							  	<td><button onclick="saveEdit(${index})">Save</button>
+								<button onclick="cancelEdit()">Cancel</button></td>
+						  </tr>`;
+				} else {
+					return `
+					<tr>
+		                  <td>${val.id}</td>
+		                  <td>${val.type}</td>
+		                  <td>${val.name}</td>
+		                  <td>${val.stock}</td>
+		                  <td>${val.price}</td>
+		                  <td><button onclick="addToCart(${val.id})">AddToCart</button></td>
+		                  <td><button onclick="editProduct(${i})">Edit</button></td>
+		                  <td><button onclick="deleteProduct(${i})">Delete</button></td>
+		              </tr>`;
+				}
+			});
 
-		              </tr>
-		              `;
-				// console.log(editproduct2);
-				document.getElementById("tableBody").innerHTML =
-					editproduct2 + showProducts(products);
-			} else {
-				showProducts(products);
-			}
+			return (document.getElementById("tableBody").innerHTML = output.join(""));
 		}
+		// function generateID() {
+		// 	let randomID = Math.floor(Math.random() * 1000000 + 1);
+		// 	document.getElementById("IDButton").value = randomID;
+		// }
+		console.log(products);
 		function saveEdit(index) {
 			let editType = document.getElementById("editType").value;
 			let editName = document.getElementById("editName").value;
 			let editStock = document.getElementById("editStock").value;
 			let editPrice = document.getElementById("editPrice").value;
+			// let editID = document.getElementById("IDButton").value;
 
 			products[index] = {
 				id: products[index].id,
@@ -239,6 +255,7 @@
 				price: editPrice,
 			};
 			showProducts(products);
+			console.log(products);
 		}
 		function cancelEdit() {
 			showProducts(products);
@@ -275,13 +292,10 @@
 			let produkInCart = produkCart.find((val) => {
 				return val.id === value;
 			});
-			console.log(produkInCart);
+
 			let produkIndex = produkCart.findIndex((val) => {
 				return val.id === value;
 			});
-			console.log(value);
-
-			console.log(produkIndex);
 
 			if (produkInCart) {
 				let productKurang = products.findIndex((val) => {
@@ -318,17 +332,17 @@
 			let grandTotal = subTotal + tax;
 			let output = produkCart.map((val) => {
 				return `
-                      ${val.type} | ${val.name} | ${val.qty} x ${val.price} : ${
+		                    ${val.type} | ${val.name} | ${val.qty} x ${val.price} : ${
 					val.qty * val.price
 				}<br><br>`;
 			});
-			console.log(output);
+			// console.log(output);
 			document.getElementById("paymentOutput").innerHTML =
 				output.join("") +
 				`
-            <h3>SubTotal: ${subTotal}</h3>
-            <h4>Tax: ${tax}</h4>
-            <h3>GrandTotal: ${grandTotal}</h3>`;
+		          <h3>SubTotal: ${subTotal}</h3>
+		          <h4>Tax: ${tax}</h4>
+		          <h3>GrandTotal: ${grandTotal}</h3>`;
 			document.getElementById("tableHeadCart").innerHTML = ``;
 			document.getElementById("tableBodyCart").innerHTML = ``;
 			document.getElementById("payment").innerHTML = ``;
