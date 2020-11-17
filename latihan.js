@@ -80,7 +80,7 @@
 
 // console.log(coloredCircle);
 // comment123
-// let bintang = "";
+let bintang = "";
 
 //KOTAK
 // for (let i = 0; i < 5; i++) {
@@ -105,6 +105,7 @@
 // 	}
 // 	bintang += "\n";
 // }
+// console.log(bintang);
 //SEGITIGA3
 // for (let i = 0; i < 5; i++) {
 // 	for (let j = 5; j > i; j--) {
@@ -128,6 +129,46 @@
 // let num = Math.floor(Math.random() * 100000 + 1);
 // console.log(num);
 
-let waktu = new Date();
-let num = waktu.getTime();
-console.log(num);
+// let waktu = new Date();
+// let num = waktu.getTime();
+// console.log(num);
+
+// let angka = [
+// 	[1, 2, 3],
+// 	[4, 5, 6],
+// 	[7, 8, 9],
+// ];
+// console.log(angka[0]);
+
+function automorphic(n) {
+	// let sqr = n * n;
+	// let y = n.toString();
+	// let arr = [];
+	// for (let i = 0; i < y.length; i++) {
+	// 	arr.push(parseInt(y[i]));
+	// }
+	// let arr2 = parseInt(arr.join(""));
+	// let sqr2 = sqr.toString();
+	// if (sqr2.slice(-y.length) == y) {
+	// 	return "Automorphic";
+	// } else {
+	// 	return "Not!!";
+	// }
+
+	let len = n.toString().length;
+	let num = (n * n).toString().slice(-len);
+	return n == num ? "Automorphic" : "Not!!";
+}
+console.log(automorphic(6));
+// let a = 100;
+// let b = a.toString();
+// let a = [1, 1, 1, 6, 2, 5];
+// let b = a.toString();
+// let c = b.split();
+// let x = 332;
+// let arr = [];
+// let z = x.toString();
+// let y = arr.push(x[1]);
+// console.log(z.length);
+// console.log(parseInt(a.join("")));
+// console.log(b);
