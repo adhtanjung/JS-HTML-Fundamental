@@ -140,26 +140,26 @@ let bintang = "";
 // ];
 // console.log(angka[0]);
 
-function automorphic(n) {
-	// let sqr = n * n;
-	// let y = n.toString();
-	// let arr = [];
-	// for (let i = 0; i < y.length; i++) {
-	// 	arr.push(parseInt(y[i]));
-	// }
-	// let arr2 = parseInt(arr.join(""));
-	// let sqr2 = sqr.toString();
-	// if (sqr2.slice(-y.length) == y) {
-	// 	return "Automorphic";
-	// } else {
-	// 	return "Not!!";
-	// }
+// function automorphic(n) {
+// let sqr = n * n;
+// let y = n.toString();
+// let arr = [];
+// for (let i = 0; i < y.length; i++) {
+// 	arr.push(parseInt(y[i]));
+// }
+// let arr2 = parseInt(arr.join(""));
+// let sqr2 = sqr.toString();
+// if (sqr2.slice(-y.length) == y) {
+// 	return "Automorphic";
+// } else {
+// 	return "Not!!";
+// }
 
-	let len = n.toString().length;
-	let num = (n * n).toString().slice(-len);
-	return n == num ? "Automorphic" : "Not!!";
-}
-console.log(automorphic(6));
+// 	let len = n.toString().length;
+// 	let num = (n * n).toString().slice(-len);
+// 	return n == num ? "Automorphic" : "Not!!";
+// }
+// console.log(automorphic(12345));
 // let a = 100;
 // let b = a.toString();
 // let a = [1, 1, 1, 6, 2, 5];
@@ -172,3 +172,26 @@ console.log(automorphic(6));
 // console.log(z.length);
 // console.log(parseInt(a.join("")));
 // console.log(b);
+// let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// function minSum(arr) {
+// 	let arr2 = arr;
+// 	let len = arr2.length / 2;
+// 	let output = 0;
+// 	for (let i = 0; i < len; i++) {
+// 		let max = Math.max(...arr2);
+// 		let min = Math.min(...arr2);
+// 		output += max * min;
+
+// 		let Maximum = arr2.findIndex((val) => {
+// 			return val == max;
+// 		});
+// 		arr2.splice(Maximum, 1);
+// 		let Minimum = arr2.findIndex((val) => {
+// 			return val == min;
+// 		});
+// 		arr2.splice(Minimum, 1);
+// 	}
+// 	return output;
+// }
+
+// console.log(minSum([5, 4, 2, 3]));
